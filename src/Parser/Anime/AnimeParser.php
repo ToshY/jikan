@@ -227,10 +227,8 @@ class AnimeParser implements ParserInterface
                     str_replace($episodes->text(), '', $episodes->ancestors()->text())
                 ) === 'Unknown'
             )
-                ?
-                null
-                :
-                (int) str_replace(
+                ? null
+                : (int) str_replace(
                     $episodes->text(),
                     '',
                     $episodes->ancestors()->text()

@@ -16,7 +16,7 @@ class PinnedArticleListItem
     /**
      * @var int|null
      */
-    private int|null $malId;
+    private ?int $malId;
 
     /**
      * @var string

@@ -240,10 +240,8 @@ class MangaParser implements ParserInterface
                     str_replace($chapters->text(), '', $chapters->ancestors()->text())
                 ) === 'Unknown'
             )
-                ?
-                null
-                :
-                (int) str_replace(
+                ? null
+                : (int) str_replace(
                     $chapters->text(),
                     '',
                     $chapters->ancestors()->text()
@@ -270,10 +268,8 @@ class MangaParser implements ParserInterface
                     str_replace($volumes->text(), '', $volumes->ancestors()->text())
                 ) === 'Unknown'
             )
-                ?
-                null
-                :
-                (int) str_replace(
+                ? null
+                : (int) str_replace(
                     $volumes->text(),
                     '',
                     $volumes->ancestors()->text()

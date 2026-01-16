@@ -102,11 +102,10 @@ class MangaSearchListItem
         $instance->startDate = $parser->getStartDate();
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
-        $instance->publishing =
-            null === $instance->endDate
+        $instance->publishing
+            = null === $instance->endDate
             && null !== $instance->startDate
-            &&
-            (
+            && (
                 new \DateTimeImmutable(
                     'now',
                     new \DateTimeZone('UTC')
