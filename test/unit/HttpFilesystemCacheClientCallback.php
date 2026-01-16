@@ -52,7 +52,7 @@ class HttpFilesystemCacheClientCallback
      */
     public function __invoke(string $method, string $url, array $options = []): ResponseInterface
     {
-        $hash = sha1(json_encode(compact('method', 'url', 'options')));
+        $hash = sha1(json_encode(compact('method', 'url')));
 
         $filePath = join(DIRECTORY_SEPARATOR, [$this->cachePath, $hash]);
         if (!file_exists($filePath)) {
