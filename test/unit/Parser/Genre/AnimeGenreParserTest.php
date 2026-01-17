@@ -44,7 +44,7 @@ class AnimeGenreParserTest extends TestCase
     #[Test]
     public function it_gets_the_count()
     {
-        self::assertEquals(4369, $this->parser->getCount());
+        self::assertEquals(4865, $this->parser->getCount());
     }
 
     #[Test]

@@ -38,11 +38,22 @@ class NewsSearchTest extends TestCase
         $entry = $this->parser->getResults()[0];
 
         self::assertEquals(72179758, $entry->getMalId());
-        self::assertEquals("https://myanimelist.net/news/72179758", $entry->getUrl());
+
+        $this->assertIsString($entry->getUrl());
+        $this->assertNotFalse(filter_var($entry->getUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/news/', parse_url($entry->getUrl())['path']);
+
         self::assertInstanceOf(\DateTimeImmutable::class, $entry->getDate());
         self::assertEquals("Vindstot", $entry->getAuthorUsername());
-        self::assertEquals("https://myanimelist.net/profile/Vindstot", $entry->getAuthorUrl());
-        self::assertEquals("https://cdn.myanimelist.net/s/common/uploaded_files/1735411918-1602672abbdcd42634b42971af484964.jpeg?s=9c9cebbaf9606225d4b424fed5091338", $entry->getImages()->getJpg()->getImageUrl());
+
+        $this->assertIsString($entry->getAuthorUrl());
+        $this->assertNotFalse(filter_var($entry->getAuthorUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/profile/', parse_url($entry->getAuthorUrl())['path']);
+
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
+            $entry->getImages()->getJpg()->getImageUrl()
+        );
         self::assertEquals(16, $entry->getComments());
         self::assertStringContainsString("The 14th and final episode of the Bleach: Sennen Kessen-hen", $entry->getExcerpt());
         self::assertCount(2, $entry->getTags());

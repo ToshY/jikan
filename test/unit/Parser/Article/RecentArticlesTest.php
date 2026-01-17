@@ -40,13 +40,24 @@ class RecentArticlesTest extends TestCase
     {
         $entry = $this->parser->getResults()[0];
 
-        self::assertEquals(2398, $entry->getMalId());
-        self::assertEquals("https://myanimelist.net/featured/2398/Behind_the_Masks__Unveiling_the_mystery_gothic_anime_Ave_Mujica", $entry->getUrl());
-        self::assertEquals("MAL_editing_team", $entry->getAuthorUsername());
-        self::assertEquals("https://myanimelist.net/profile/MAL_editing_team", $entry->getAuthorUrl());
-        self::assertEquals("https://cdn.myanimelist.net/s/common/uploaded_files/1734918805-7d43d1c96aa13b0f26d4da1523d973d2.jpeg", $entry->getImages()->getJpg()->getImageUrl());
-        self::assertEquals(27140, $entry->getViews());
-        self::assertStringContainsString("Ave Mujica - The Die is Cast - Exclusive interview with Director Kodai Kakimoto and Band Producer Hiroki Matsumoto.", $entry->getExcerpt());
+        self::assertEquals(2408, $entry->getMalId());
+
+        $this->assertIsString($entry->getUrl());
+        $this->assertNotFalse(filter_var($entry->getUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/featured/', parse_url($entry->getUrl())['path']);
+
+        self::assertEquals("firefractal", $entry->getAuthorUsername());
+
+        $this->assertIsString($entry->getAuthorUrl());
+        $this->assertNotFalse(filter_var($entry->getAuthorUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/profile/', parse_url($entry->getAuthorUrl())['path']);
+
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
+            $entry->getImages()->getJpg()->getImageUrl()
+        );
+        self::assertEquals(17559, $entry->getViews());
+        self::assertStringContainsString("The J-POP SOUND CAPSULE music festival brought the spirit", $entry->getExcerpt());
         self::assertCount(0, $entry->getTags());
     }
 }

@@ -38,13 +38,24 @@ class ArticlesPinnedTest extends TestCase
     {
         $entry = $this->parser->getResults()[0];
 
-        self::assertEquals(2399, $entry->getMalId());
-        self::assertEquals("https://myanimelist.net/featured/2399/Which_Futuristic_High-Tech_World_Should_Be_Adapted_by_WIT_Studio", $entry->getUrl());
+        self::assertEquals(2402, $entry->getMalId());
+
+        $this->assertIsString($entry->getUrl());
+        $this->assertNotFalse(filter_var($entry->getUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/featured/', parse_url($entry->getUrl())['path']);
+
         self::assertEquals("MAL_editing_team", $entry->getAuthorUsername());
-        self::assertEquals("https://myanimelist.net/profile/MAL_editing_team", $entry->getAuthorUrl());
-        self::assertEquals("https://cdn.myanimelist.net/s/common/uploaded_files/1739950224-05e29491bfcc1729b3affbb08e6ab53e.png?s=ac1dcf66aa9d390008d61091eb5d6afe", $entry->getImages()->getJpg()->getImageUrl());
-        self::assertEquals(15769, $entry->getViews());
-        self::assertStringContainsString("Here are the 10 finalists from the MAL x Honeyfeed Writing Contest 2024!", $entry->getExcerpt());
+
+        $this->assertIsString($entry->getAuthorUrl());
+        $this->assertNotFalse(filter_var($entry->getAuthorUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/profile/', parse_url($entry->getAuthorUrl())['path']);
+
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
+            $entry->getImages()->getJpg()->getImageUrl()
+        );
+        self::assertEquals(7156, $entry->getViews());
+        self::assertStringContainsString("Dive into BLEACH, NARUTO, and Hunter x Hunter movie sagas, now streaming 24/7", $entry->getExcerpt());
         self::assertCount(0, $entry->getTags());
     }
 }

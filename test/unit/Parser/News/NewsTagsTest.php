@@ -30,7 +30,7 @@ class NewsTagsTest extends TestCase
     #[Test]
     public function it_gets_results()
     {
-        self::assertEquals(135, count($this->parser->getModel()));
+        self::assertEquals(139, count($this->parser->getModel()));
     }
 
     #[Test]

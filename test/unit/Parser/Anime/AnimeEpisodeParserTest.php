@@ -54,7 +54,7 @@ class AnimeEpisodeParserTest extends TestCase
     public function it_gets_title_japanese(): void
     {
         self::assertEquals(
-            '俺はルフィ!海賊王になる男だ!',
+            '俺はルフィ！海賊王になる男だ！',
             $this->parser->getTitleJapanese()
         );
     }
@@ -72,7 +72,7 @@ class AnimeEpisodeParserTest extends TestCase
     public function it_gets_duration(): void
     {
         self::assertEquals(
-            1475,
+            1477,
             $this->parser->getDuration()
         );
     }
@@ -108,7 +108,7 @@ class AnimeEpisodeParserTest extends TestCase
     public function it_gets_synopsis(): void
     {
         self::assertStringContainsString(
-            'The series begins with an attack on a cruise ship at the hands of Alvida. Coby, a slave of Alvida, discovers a barrel.',
+            'In the ocean, Alvida and her pirate crew attack a cruise ship. Coby, a slave of Alvida, discovers',
             $this->parser->getSynopsis()
         );
     }

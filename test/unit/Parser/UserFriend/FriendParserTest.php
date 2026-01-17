@@ -21,7 +21,7 @@ class FriendParserTest extends TestCase
         $crawler = $client->request('GET', 'https://myanimelist.net/profile/nekomata1037/friends');
         $this->parser = new \Jikan\Parser\User\Friends\FriendParser(
             $crawler->filterXPath(
-                '//div[contains(@class, "boxlist-container")]/div[contains(@class, "boxlist")][3]'
+                '//div[contains(@class, "boxlist-container")]/div[contains(@class, "boxlist")][5]'
             )
         );
     }

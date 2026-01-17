@@ -32,43 +32,49 @@ class ForumTopicParserTest extends TestCase
     #[Test]
     public function it_gets_the_post_id(): void
     {
-        self::assertEquals(24885, $this->parser->getTopicId());
+        self::assertEquals(40846, $this->parser->getTopicId());
     }
 
     #[Test]
     public function it_gets_the_post_url(): void
     {
-        self::assertEquals('https://myanimelist.net/forum/?topicid=24885', $this->parser->getUrl());
+        $url = $this->parser->getUrl();
+        $this->assertIsString($url);
+        $this->assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/forum/', parse_url($url)['path']);
     }
 
     #[Test]
     public function it_gets_the_post_title(): void
     {
-        self::assertEquals('Cowboy Bebop Episode 18 Discussion', $this->parser->getTitle());
+        self::assertEquals('Cowboy Bebop Episode 20 Discussion', $this->parser->getTitle());
     }
 
     #[Test]
     public function it_gets_the_post_date(): void
     {
-        self::assertEquals('2008-05-14', $this->parser->getPostDate()->format('Y-m-d'));
+        self::assertEquals('2008-08-29', $this->parser->getPostDate()->format('Y-m-d'));
     }
 
     #[Test]
     public function it_gets_the_author_name(): void
     {
-        self::assertEquals('FighterZ', $this->parser->getAuthorName());
+        self::assertEquals('Issun', $this->parser->getAuthorName());
     }
 
     #[Test]
     public function it_gets_the_author_url(): void
     {
-        self::assertEquals('https://myanimelist.net/profile/FighterZ', $this->parser->getAuthorUrl());
+        $url = $this->parser->getAuthorUrl();
+        $this->assertIsString($url);
+        $this->assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/profile/', parse_url($url)['path']);
     }
 
     #[Test]
     public function it_gets_the_replies(): void
     {
-        self::assertEquals(160, $this->parser->getReplies());
+        self::assertEquals(256, $this->parser->getReplies());
     }
 
     #[Test]
@@ -76,10 +82,17 @@ class ForumTopicParserTest extends TestCase
     {
         $lastPost = $this->parser->getLastPost();
         self::assertInstanceOf(ForumPost::class, $lastPost);
-        self::assertEquals('Daiko', $lastPost->getAuthorUsername());
-        self::assertEquals('https://myanimelist.net/profile/Daiko', $lastPost->getAuthorUrl());
-        self::assertEquals('https://myanimelist.net/forum/?topicid=24885&goto=lastpost', $lastPost->getUrl());
+        self::assertEquals('keyboardeater', $lastPost->getAuthorUsername());
+
+        $this->assertIsString($lastPost->getAuthorUrl());
+        $this->assertNotFalse(filter_var($lastPost->getAuthorUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/profile/', parse_url($lastPost->getAuthorUrl())['path']);
+
+        $this->assertIsString($lastPost->getUrl());
+        $this->assertNotFalse(filter_var($lastPost->getUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/forum/', parse_url($lastPost->getUrl())['path']);
+
         // Last post is 'by  Today, 6:29 AM, so just check hour, not day
-        self::assertEquals('17:21', $lastPost->getDate()->format('H:i'));
+        self::assertEquals('08:49', $lastPost->getDate()->format('H:i'));
     }
 }

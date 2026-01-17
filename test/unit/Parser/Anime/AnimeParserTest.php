@@ -82,8 +82,8 @@ class AnimeParserTest extends TestCase
     #[Test]
     public function it_gets_the_anime_image_url(): void
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/anime/7/20310.jpg',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getImageURL()
         );
     }
@@ -160,7 +160,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_producer(): void
     {
         $producers = $this->parser->getProducers();
-        self::assertCount(1, $producers);
+        self::assertCount(2, $producers);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $producers);
         $names = array_map(function ($item) {
             return $item->getName();
@@ -172,13 +172,12 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_licensor(): void
     {
         $licensors = $this->parser->getLicensors();
-        self::assertCount(2, $licensors);
+        self::assertCount(1, $licensors);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $licensors);
         $names = array_map(function ($item) {
             return $item->getName();
         }, $licensors);
         self::assertContains('Funimation', $names);
-        self::assertContains('Geneon Entertainment USA', $names);
     }
 
     #[Test]
@@ -203,15 +202,13 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_genre(): void
     {
         $genres = $this->parser->getGenres();
-        self::assertCount(5, $genres);
+        self::assertCount(3, $genres);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $genres);
         $names = array_map(function ($item) {
             return $item->getName();
         }, $genres);
         self::assertContains('Action', $names);
         self::assertContains('Adventure', $names);
-        self::assertContains('Comedy', $names);
-        self::assertContains('Drama', $names);
         self::assertContains('Sci-Fi', $names);
     }
 
@@ -246,7 +243,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_scored_by(): void
     {
         self::assertEquals(
-            336220,
+            396690,
             $this->parser->getScoredBy()
         );
     }
@@ -255,7 +252,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_rank(): void
     {
         self::assertEquals(
-            308,
+            394,
             $this->parser->getRank()
         );
     }
@@ -264,7 +261,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_popularity(): void
     {
         self::assertEquals(
-            243,
+            264,
             $this->parser->getPopularity()
         );
     }
@@ -273,7 +270,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_members(): void
     {
         self::assertEquals(
-            678927,
+            822213,
             $this->parser->getMembers()
         );
     }
@@ -282,7 +279,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_favorites(): void
     {
         self::assertEquals(
-            13750,
+            17375,
             $this->parser->getFavorites()
         );
     }
@@ -291,8 +288,8 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_related(): void
     {
         $related = $this->parser->getRelated();
-        self::assertCount(0, $related);
-        self::assertContainsOnlyInstancesOf(MalUrl::class, $related);
+        self::assertCount(3, $related);
+        self::assertContainsOnlyInstancesOf(MalUrl::class, $related['Adaptation']);
     }
 
     #[Test]

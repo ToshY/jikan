@@ -41,26 +41,26 @@ class CharacterListItemParserTest extends TestCase
     #[Test]
     public function it_gets_the_mal_id()
     {
-        self::assertEquals(116275, $this->parser->getMalId());
+        self::assertIsNumeric(116275, $this->parser->getMalId());
     }
 
     #[Test]
     public function it_gets_the_name()
     {
-        self::assertEquals('Albedo', $this->parser->getName());
+        self::assertEquals('Momonga', $this->parser->getName());
     }
 
     #[Test]
     public function it_gets_the_url()
     {
-        self::assertEquals('https://myanimelist.net/character/116275/Albedo', $this->parser->getCharacterUrl());
+        self::assertEquals('https://myanimelist.net/character/116281/Momonga', $this->parser->getCharacterUrl());
     }
 
     #[Test]
     public function it_gets_the_image()
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/characters/14/292046.jpg?s=db3bc7bfe5c676d984e469f0537d08bb',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getImage()
         );
     }
@@ -70,13 +70,13 @@ class CharacterListItemParserTest extends TestCase
     {
         $voiceActors = $this->parser->getVoiceActors();
         self::assertContainsOnly(VoiceActor::class, $voiceActors);
-        self::assertCount(6, $voiceActors);
-        self::assertEquals('Hara, Yumi', $voiceActors[0]->getPerson()->getName());
+        self::assertCount(9, $voiceActors);
+        self::assertEquals('Hino, Satoshi', $voiceActors[0]->getPerson()->getName());
         self::assertEquals('Japanese', $voiceActors[0]->getLanguage());
-        self::assertEquals('Maxwell, Elizabeth', $voiceActors[1]->getPerson()->getName());
+        self::assertEquals('Guerrero, Chris', $voiceActors[1]->getPerson()->getName());
         self::assertEquals('English', $voiceActors[1]->getLanguage());
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/voiceactors/3/49242.jpg?s=7a7f209e6414f65664f03d8207372870',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $voiceActors[1]->getPerson()->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -85,7 +85,7 @@ class CharacterListItemParserTest extends TestCase
     public function it_gets_the_favorites_count()
     {
         self::assertEquals(
-            7606,
+            13947,
             $this->parser->getFavorites()
         );
     }

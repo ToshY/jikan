@@ -40,13 +40,13 @@ class ClubParserTest extends TestCase
             'https://myanimelist.net/clubs.php?cid=1',
             $this->parser->getUrl()
         );
-    }
+  }
 
     #[Test]
     public function it_gets_image_url(): void
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/clubs/16/222057.jpg',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getImageUrl()
         );
     }
@@ -64,7 +64,7 @@ class ClubParserTest extends TestCase
     public function it_gets_members_count(): void
     {
         self::assertEquals(
-            1398,
+            1401,
             $this->parser->getMembersCount()
         );
     }

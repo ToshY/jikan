@@ -41,26 +41,26 @@ class StaffListItemParserTest extends TestCase
     #[Test]
     public function it_gets_the_mal_id()
     {
-        self::assertEquals(12596, $this->parser->getMalId());
+        self::assertEquals(37118, $this->parser->getMalId());
     }
 
     #[Test]
     public function it_gets_the_name()
     {
-        self::assertEquals('Tom-H@ck', $this->parser->getName());
+        self::assertEquals('Gou, Fumiyuki', $this->parser->getName());
     }
 
     #[Test]
     public function it_gets_the_url()
     {
-        self::assertEquals('https://myanimelist.net/people/12596/Tom-Hck', $this->parser->getUrl());
+        self::assertEquals('https://myanimelist.net/people/37118/Fumiyuki_Gou', $this->parser->getUrl());
     }
 
     #[Test]
     public function it_gets_the_image()
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/voiceactors/3/33089.jpg?s=50f22657ed0a169f99eb8d18342e5486',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getImage()
         );
     }
@@ -69,8 +69,7 @@ class StaffListItemParserTest extends TestCase
     public function it_gets_the_positions()
     {
         $positions = $this->parser->getPositions();
-        self::assertCount(2, $positions);
-        self::assertContains('Theme Song Composition', $positions);
-        self::assertContains('Theme Song Arrangement', $positions);
+        self::assertCount(1, $positions);
+        self::assertContains('Sound Director', $positions);
     }
 }

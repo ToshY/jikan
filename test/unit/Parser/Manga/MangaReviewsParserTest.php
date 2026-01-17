@@ -72,8 +72,8 @@ class MangaReviewsParserTest extends TestCase
     #[Test]
     public function it_gets_reviewer_image_url(): void
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/userimages/132886.jpg?t=1368353400',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->review->getUser()->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -99,14 +99,14 @@ class MangaReviewsParserTest extends TestCase
     #[Test]
     public function it_gets_reviewer_reactions(): void
     {
-        self::assertEquals(1, $this->review->getReactions()->getLoveIt());
+        self::assertEquals(18, $this->review->getReactions()->getLoveIt());
         self::assertEquals(0, $this->review->getReactions()->getCreative());
-        self::assertEquals(5, $this->review->getReactions()->getWellWritten());
-        self::assertEquals(0, $this->review->getReactions()->getInformative());
-        self::assertEquals(4, $this->review->getReactions()->getConfusing());
-        self::assertEquals(3, $this->review->getReactions()->getFunny());
-        self::assertEquals(448, $this->review->getReactions()->getNice());
-        self::assertEquals(461, $this->review->getReactions()->getOverall());
+        self::assertEquals(14, $this->review->getReactions()->getWellWritten());
+        self::assertEquals(1, $this->review->getReactions()->getInformative());
+        self::assertEquals(11, $this->review->getReactions()->getConfusing());
+        self::assertEquals(5, $this->review->getReactions()->getFunny());
+        self::assertEquals(490, $this->review->getReactions()->getNice());
+        self::assertEquals(539, $this->review->getReactions()->getOverall());
     }
 
     #[Test]

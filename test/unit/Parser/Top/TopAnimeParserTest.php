@@ -33,8 +33,12 @@ class TopAnimeParserTest extends TestCase
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Fruits Basket: The Final', $url->getTitle());
-        self::assertEquals('https://myanimelist.net/anime/42938/Fruits_Basket__The_Final', $url->getUrl());
+        self::assertEquals('Gintama\'', $url->getTitle());
+
+        $url = $url->getUrl();
+        $this->assertIsString($url);
+        $this->assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/anime/', parse_url($url)['path']);
     }
 
     #[Test]
@@ -46,8 +50,8 @@ class TopAnimeParserTest extends TestCase
     #[Test]
     public function it_gets_the_image()
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/anime/1085/114792.jpg?s=bb4303c0804c9d5ca9fcb30b8f8e6783',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getImage()
         );
     }
@@ -67,24 +71,24 @@ class TopAnimeParserTest extends TestCase
     #[Test]
     public function it_gets_the_anime_episodes()
     {
-        self::assertEquals(13, $this->parser->getEpisodes());
+        self::assertEquals(51, $this->parser->getEpisodes());
     }
 
     #[Test]
     public function it_gets_the_anime_members()
     {
-        self::assertEquals(376544, $this->parser->getMembers());
+        self::assertEquals(604995, $this->parser->getMembers());
     }
 
     #[Test]
     public function it_gets_the_anime_start_date()
     {
-        self::assertEquals('Apr 2021', $this->parser->getStartDate());
+        self::assertEquals('Apr 2011', $this->parser->getStartDate());
     }
 
     #[Test]
     public function it_gets_the_anime_end_date()
     {
-        self::assertEquals('Jun 2021', $this->parser->getEndDate());
+        self::assertEquals('Mar 2012', $this->parser->getEndDate());
     }
 }

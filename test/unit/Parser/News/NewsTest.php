@@ -48,7 +48,10 @@ class NewsTest extends TestCase
     #[Test]
     public function it_gets_image()
     {
-        self::assertEquals("https://cdn.myanimelist.net/s/common/uploaded_files/1711247040-f0e4443ae58814bfb46845fe448c5850.png", $this->parser->getImageUrl());
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
+            $this->parser->getImageUrl()
+        );
     }
 
     #[Test]

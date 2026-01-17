@@ -28,7 +28,7 @@ class AnimeEpisodesParserTest extends TestCase
     public function it_gets_episodes_last_page(): void
     {
         self::assertEquals(
-            11,
+            12,
             $this->parser->getLastPage()
         );
     }
@@ -55,7 +55,7 @@ class AnimeEpisodesParserTest extends TestCase
     public function it_gets_episode_title_japanese(): void
     {
         self::assertEquals(
-            "俺はルフィ!海賊王になる男だ!",
+            "俺はルフィ！海賊王になる男だ！",
             $this->parser->getEpisodes()[0]->getTitleJapanese()
         );
     }
@@ -119,7 +119,7 @@ class AnimeEpisodesParserTest extends TestCase
     public function it_gets_episodes_score(): void
     {
         self::assertEquals(
-            4.26,
+            4.11,
             $this->parser->getEpisodes()[0]->getScore()
         );
     }

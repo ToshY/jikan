@@ -68,14 +68,14 @@ class PersonParserTest extends TestCase
     #[Test]
     public function it_gets_the_member_favorites()
     {
-        self::assertEquals(38896, $this->parser->getPersonFavorites());
+        self::assertEquals(41400, $this->parser->getPersonFavorites());
     }
 
     #[Test]
     public function it_gets_the_image()
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/voiceactors/2/65500.jpg',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getPersonImageUrl()
         );
     }
@@ -84,7 +84,7 @@ class PersonParserTest extends TestCase
     public function it_gets_the_voice_acting_roles()
     {
         $voiceActingRoles = $this->parser->getPersonVoiceActingRoles();
-        self::assertCount(537, $voiceActingRoles);
+        self::assertCount(632, $voiceActingRoles);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Person\VoiceActingRole::class, $voiceActingRoles);
     }
 

@@ -33,25 +33,26 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_username(): void
     {
         self::assertEquals(
-            "Dylanzio",
+            "lampfan3005",
             $this->parser->getResults()[6]->getUser()->getUsername()
         );
+
     }
 
     #[Test]
     public function it_gets_url(): void
     {
-        self::assertEquals(
-            "https://myanimelist.net/profile/Dylanzio",
-            $this->parser->getResults()[6]->getUser()->getUrl()
-        );
+        $url = $this->parser->getResults()[6]->getUser()->getUrl();
+        $this->assertIsString($url);
+        $this->assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/profile/', parse_url($url)['path']);
     }
 
     #[Test]
     public function it_gets_image_url(): void
     {
-        self::assertEquals(
-            "https://cdn.myanimelist.net/images/userimages/12682629.jpg?t=1664638800",
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getResults()[6]->getUser()->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -59,14 +60,14 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
     #[Test]
     public function it_gets_score(): void
     {
-        self::assertNull($this->parser->getResults()[6]->getScore());
+        self::assertEquals(10, $this->parser->getResults()[6]->getScore());
     }
 
     #[Test]
     public function it_gets_status(): void
     {
         self::assertEquals(
-            "Reading",
+            "Completed",
             $this->parser->getResults()[6]->getStatus()
         );
     }
@@ -75,7 +76,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_chapters_read(): void
     {
         self::assertEquals(
-            133,
+            162,
             $this->parser->getResults()[6]->getChaptersRead()
         );
     }
@@ -92,7 +93,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
     #[Test]
     public function it_gets_volumes_read(): void
     {
-        self::assertNull($this->parser->getResults()[6]->getVolumesRead());
+        self::assertEquals(18, $this->parser->getResults()[6]->getVolumesRead());
     }
 
 

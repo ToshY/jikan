@@ -47,8 +47,8 @@ class AnimeographyParserTest extends TestCase
     #[Test]
     public function it_gets_the_anime_image()
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/anime/7/88019.jpg?s=5a069ff3bdeebefc62a334e9a3a41c18',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getImage()
         );
     }

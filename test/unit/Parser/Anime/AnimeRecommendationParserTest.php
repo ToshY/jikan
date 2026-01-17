@@ -26,7 +26,7 @@ class AnimeRecommendationParserTest extends TestCase
     #[Test]
     public function it_get_recommendations_count(): void
     {
-        self::assertCount(131, $this->model);
+        self::assertCount(143, $this->model);
     }
 
     #[Test]
@@ -38,17 +38,17 @@ class AnimeRecommendationParserTest extends TestCase
     #[Test]
     public function it_gets_url(): void
     {
-        self::assertEquals(
-            "https://myanimelist.net/recommendations/anime/21-6702",
-            $this->model[0]->getUrl()
-        );
+        $url = $this->model[0]->getUrl();
+        $this->assertIsString($url);
+        $this->assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/recommendations/', parse_url($url)['path']);
     }
 
     #[Test]
     public function it_gets_image_url(): void
     {
-        self::assertEquals(
-            "https://cdn.myanimelist.net/images/anime/5/18179.jpg?s=24a281654f63558f3ef001950a9e6539",
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->model[0]->getEntry()->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -75,7 +75,7 @@ class AnimeRecommendationParserTest extends TestCase
     public function it_gets_recommendation_count(): void
     {
         self::assertCount(
-            131,
+            143,
             $this->model
         );
     }

@@ -39,8 +39,12 @@ class TopMangaParserTest extends TestCase
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Slam Dunk', $url->getTitle());
-        self::assertEquals('https://myanimelist.net/manga/51/Slam_Dunk', $url->getUrl());
+        self::assertEquals('Monster', $url->getTitle());
+
+        $url = $url->getUrl();
+        $this->assertIsString($url);
+        $this->assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/manga/', parse_url($url)['path']);
     }
 
     #[Test]
@@ -52,7 +56,7 @@ class TopMangaParserTest extends TestCase
     #[Test]
     public function it_gets_the_manga_score()
     {
-        self::assertEquals(9.06, $this->parser->getScore());
+        self::assertEquals(9.16, $this->parser->getScore());
     }
 
     #[Test]
@@ -67,32 +71,32 @@ class TopMangaParserTest extends TestCase
         $parser2 = new TopListItemParser(
             $this->crawler->filterXPath('//tr[@class="ranking-list"]')->eq(1)
         );
-        self::assertEquals(31, $this->parser->getVolumes());
+        self::assertEquals(18, $this->parser->getVolumes());
     }
 
     #[Test]
     public function it_gets_the_manga_members()
     {
-        self::assertEquals(138611, $this->parser->getMembers());
+        self::assertEquals(283550, $this->parser->getMembers());
     }
 
     #[Test]
     public function it_gets_the_manga_start_date()
     {
-        self::assertEquals('Sep 1990', $this->parser->getStartDate());
+        self::assertEquals('Dec 1994', $this->parser->getStartDate());
     }
 
     #[Test]
     public function it_gets_the_manga_end_date()
     {
-        self::assertEquals('Jun 1996', $this->parser->getEndDate());
+        self::assertEquals('Dec 2001', $this->parser->getEndDate());
     }
 
     #[Test]
     public function it_gets_the_manga_image()
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/manga/2/258749.jpg?s=fad0d2cae56806beefaca50b445fa0dd',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getImage()
         );
     }

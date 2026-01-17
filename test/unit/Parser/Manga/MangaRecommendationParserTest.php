@@ -26,7 +26,7 @@ class MangaRecommendationParserTest extends TestCase
     #[Test]
     public function it_get_recommendations_count(): void
     {
-        self::assertCount(46, $this->model);
+        self::assertCount(51, $this->model);
     }
 
     #[Test]
@@ -47,8 +47,8 @@ class MangaRecommendationParserTest extends TestCase
     #[Test]
     public function it_gets_image_url(): void
     {
-        self::assertEquals(
-            "https://cdn.myanimelist.net/images/manga/1/258245.jpg?s=dc85ade0b0e1083e92fd8c4509808626",
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->model[0]->getEntry()->getImages()->getJpg()->getImageUrl()
         );
     }

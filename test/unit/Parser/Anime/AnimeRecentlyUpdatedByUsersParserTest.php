@@ -33,7 +33,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_username(): void
     {
         self::assertEquals(
-            "KyouTorii",
+            "radim5275",
             $this->model->getResults()[0]->getUser()->getUsername()
         );
     }
@@ -41,17 +41,17 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     #[Test]
     public function it_gets_url(): void
     {
-        self::assertEquals(
-            "https://myanimelist.net/profile/KyouTorii",
-            $this->model->getResults()[0]->getUser()->getUrl()
-        );
+        $url = $this->model->getResults()[0]->getUser()->getUrl();
+        $this->assertIsString($url);
+        $this->assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/profile/', parse_url($url)['path']);
     }
 
     #[Test]
     public function it_gets_image_url(): void
     {
-        self::assertEquals(
-            "https://cdn.myanimelist.net/images/userimages/15361140.jpg?t=1664641200",
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->model->getResults()[0]->getUser()->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -59,14 +59,14 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     #[Test]
     public function it_gets_score(): void
     {
-        self::assertNull($this->model->getResults()[0]->getScore());
+        self::assertEquals(7, $this->model->getResults()[0]->getScore());
     }
 
     #[Test]
     public function it_gets_status(): void
     {
         self::assertEquals(
-            "Plan to Watch",
+            "Watching",
             $this->model->getResults()[0]->getStatus()
         );
     }
@@ -75,7 +75,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_episodes_seen(): void
     {
         self::assertEquals(
-            null,
+            20,
             $this->model->getResults()[0]->getEpisodesSeen()
         );
     }
@@ -84,7 +84,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_episodes_total(): void
     {
         self::assertEquals(
-            null,
+            26,
             $this->model->getResults()[0]->getEpisodesTotal()
         );
     }

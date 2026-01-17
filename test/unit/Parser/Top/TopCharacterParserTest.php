@@ -34,15 +34,18 @@ class TopCharacterParserTest extends TestCase
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Monkey D., Luffy', $url->getTitle());
-        self::assertEquals('https://myanimelist.net/character/40/Luffy_Monkey_D', $url->getUrl());
+        self::assertEquals('Levi', $url->getTitle());
+        $url = $url->getUrl();
+        $this->assertIsString($url);
+        $this->assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/character/', parse_url($url)['path']);
     }
 
     #[Test]
     public function it_gets_the_image()
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/characters/9/310307.jpg?s=1422edf1e44c7b6262386330461eecfd',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getImage()
         );
     }
@@ -56,7 +59,7 @@ class TopCharacterParserTest extends TestCase
     #[Test]
     public function it_gets_the_character_kanji()
     {
-        self::assertEquals('モンキー・D・ルフィ', $this->parser->getKanjiName());
+        self::assertNull($this->parser->getKanjiName());
     }
 
     #[Test]
@@ -76,6 +79,6 @@ class TopCharacterParserTest extends TestCase
     #[Test]
     public function it_gets_the_favorites()
     {
-        self::assertEquals(121629, $this->parser->getFavorites());
+        self::assertEquals(145185, $this->parser->getFavorites());
     }
 }

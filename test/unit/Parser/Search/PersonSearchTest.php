@@ -29,14 +29,14 @@ class PersonSearchTest extends TestCase
     #[Test]
     public function it_gets_the_name()
     {
-        self::assertEquals("Araizumi, Rui", $this->person->getName());
+        self::assertEquals("ARA", $this->person->getName());
     }
 
     #[Test]
     public function it_gets_the_image_url()
     {
-        self::assertEquals(
-            "https://cdn.myanimelist.net/images/voiceactors/2/42926.jpg?s=bf7e47ee3e4a1eb93e7ef86afed1c68b",
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->person->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -44,12 +44,12 @@ class PersonSearchTest extends TestCase
     #[Test]
     public function it_gets_the_url()
     {
-        self::assertEquals("https://myanimelist.net/people/5159/Rui_Araizumi", $this->person->getUrl());
+        self::assertEquals("https://myanimelist.net/people/88304/ARA", $this->person->getUrl());
     }
 
     #[Test]
     public function it_gets_the_alternative_names()
     {
-        self::assertContains('あらいず☆みるい', $this->person->getAlternativeNames());
+        self::assertContains('아라', $this->person->getAlternativeNames());
     }
 }

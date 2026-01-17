@@ -42,7 +42,7 @@ class MangaStatsParserTest extends TestCase
     public function it_gets_score_attributes()
     {
         self::assertEquals(
-            8404, $this->mangaStatsParser->getScores()[10]->getVotes()
+            11045, $this->mangaStatsParser->getScores()[10]->getVotes()
         );
     }
 }

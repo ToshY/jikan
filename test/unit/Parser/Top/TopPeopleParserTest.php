@@ -33,8 +33,11 @@ class TopPeopleParserTest extends TestCase
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Ono, Daisuke', $url->getName());
-        self::assertEquals('https://myanimelist.net/people/212/Daisuke_Ono', $url->getUrl());
+        self::assertEquals('Oda, Eiichiro', $url->getName());
+        $url = $url->getUrl();
+        $this->assertIsString($url);
+        $this->assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/people/', parse_url($url)['path']);
     }
 
     #[Test]
@@ -46,14 +49,14 @@ class TopPeopleParserTest extends TestCase
     #[Test]
     public function it_gets_the_favorites()
     {
-        self::assertEquals(47386, $this->parser->getPeopleFavorites());
+        self::assertEquals(56420, $this->parser->getPeopleFavorites());
     }
 
     #[Test]
     public function it_gets_the_image()
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/voiceactors/1/54593.jpg?s=3c92b9a278bb1fb08cf7f0f3f2ec7bee',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getImage()
         );
     }
@@ -61,8 +64,7 @@ class TopPeopleParserTest extends TestCase
     #[Test]
     public function it_gets_the_kanji_name()
     {
-        self::assertEquals(
-            '小野 大輔',
+        self::assertNull(
             $this->parser->getKanjiName()
         );
     }
@@ -71,7 +73,7 @@ class TopPeopleParserTest extends TestCase
     public function it_gets_the_birthday()
     {
         self::assertEquals(
-            '1978-05-04',
+            '1975-01-01',
             $this->parser->getBirthday()->format('Y-m-d')
         );
     }

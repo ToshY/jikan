@@ -28,7 +28,7 @@ class SeasonListItemParserTest extends TestCase
     #[Test]
     public function it_gets_the_year(): void
     {
-        self::assertEquals(2024, $this->parser->getYear());
+        self::assertEquals(2026, $this->parser->getYear());
     }
 
     #[Test]

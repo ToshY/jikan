@@ -47,8 +47,8 @@ class NewsListItemParserTest extends TestCase
     #[Test]
     public function it_gets_the_image(): void
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/s/common/uploaded_files/1654587114-bf53f8de5beebd981afec1932486e604.jpeg?s=14bd951b901aa46034b344818e7cbd31',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getImageUrl()
         );
     }

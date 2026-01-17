@@ -39,11 +39,22 @@ class ArticleSearchTest extends TestCase
         $entry = $this->parser->getResults()[0];
 
         self::assertEquals(2362, $entry->getMalId());
-        self::assertEquals("https://myanimelist.net/featured/2362/Special_Report_from_Aniplex_Online_Fest_2021", $entry->getUrl());
+
+        $this->assertIsString($entry->getUrl());
+        $this->assertNotFalse(filter_var($entry->getUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/featured/', parse_url($entry->getUrl())['path']);
+
         self::assertEquals("MAL_editing_team", $entry->getAuthorUsername());
-        self::assertEquals("https://myanimelist.net/profile/MAL_editing_team", $entry->getAuthorUrl());
-        self::assertEquals("https://cdn.myanimelist.net/s/common/uploaded_files/1625817089-5243aa73d42dac6444e7cad5e611eda6.jpeg", $entry->getImages()->getJpg()->getImageUrl());
-        self::assertEquals(47365, $entry->getViews());
+
+        $this->assertIsString($entry->getAuthorUrl());
+        $this->assertNotFalse(filter_var($entry->getAuthorUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/profile/', parse_url($entry->getAuthorUrl())['path']);
+
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
+            $entry->getImages()->getJpg()->getImageUrl()
+        );
+        self::assertIsNumeric($entry->getViews());
         self::assertStringContainsString("Breaking down the hottest panels at Aniplex Online Fest 2021, featuring Puella Magi Madoka Magica", $entry->getExcerpt());
         self::assertCount(0, $entry->getTags());
     }

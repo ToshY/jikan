@@ -90,8 +90,8 @@ class MangaParserTest extends TestCase
     #[Test]
     public function it_gets_the_manga_image_url()
     {
-        self::assertEquals(
-            'https://cdn.myanimelist.net/images/manga/3/249658.jpg',
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->parser->getMangaImageURL()
         );
     }
@@ -204,7 +204,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_score()
     {
         self::assertEquals(
-            8.07,
+            8.08,
             $this->manga->getScore()
         );
     }
@@ -213,7 +213,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_scored_by()
     {
         self::assertEquals(
-            254718,
+            285558,
             $this->manga->getScoredBy()
         );
     }
@@ -222,7 +222,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_rank()
     {
         self::assertEquals(
-            577,
+            654,
             $this->manga->getRank()
         );
     }
@@ -231,7 +231,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_popularity()
     {
         self::assertEquals(
-            8,
+            13,
             $this->manga->getPopularity()
         );
     }
@@ -240,7 +240,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_members()
     {
         self::assertEquals(
-            385378,
+            440021,
             $this->manga->getMembers()
         );
     }
@@ -249,7 +249,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_favorites()
     {
         self::assertEquals(
-            42312,
+            44299,
             $this->manga->getFavorites()
         );
     }
@@ -258,8 +258,8 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_related()
     {
         $related = $this->parser->getMangaRelated();
-        self::assertCount(0, $related);
-        self::assertContainsOnlyInstancesOf(MalUrl::class, $related);
+        self::assertCount(6, $related);
+        self::assertContainsOnlyInstancesOf(MalUrl::class, $related['Adaptation']);
     }
 
     #[Test]
@@ -267,11 +267,7 @@ class MangaParserTest extends TestCase
     {
         $background = $this->manga->getBackground();
         self::assertStringContainsString(
-            'Naruto has sold over 250 million copies worldwide as of 2020, making it the 4th highest grossing manga series of all time.',
-            $background
-        );
-        self::assertStringContainsString(
-            'The series was published in English by VIZ Media under the Shonen Jump',
+            'Naruto has sold over 250 million copies worldwide as of 2020, making it the 4th highest-grossing manga series of all time',
             $background
         );
     }

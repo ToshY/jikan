@@ -36,8 +36,8 @@ class CharacterSearchTest extends TestCase
     #[Test]
     public function it_gets_the_image_url()
     {
-        self::assertEquals(
-            "https://cdn.myanimelist.net/images/characters/4/226585.jpg?s=267b6d2c90c45a5bdbc191f50d431690",
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->anime->getImages()->getJpg()->getImageUrl()
         );
     }

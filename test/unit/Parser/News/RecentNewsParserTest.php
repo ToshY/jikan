@@ -40,15 +40,26 @@ class RecentNewsParserTest extends TestCase
     {
         $entry = $this->parser->getResults()[0];
 
-        self::assertEquals(72590516, $entry->getMalId());
-        self::assertEquals("https://myanimelist.net/news/72590516", $entry->getUrl());
+        self::assertEquals(73734818, $entry->getMalId());
+
+        $this->assertIsString($entry->getUrl());
+        $this->assertNotFalse(filter_var($entry->getUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/news/', parse_url($entry->getUrl())['path']);
+
         self::assertInstanceOf(\DateTimeImmutable::class, $entry->getDate());
-        self::assertEquals("DatRandomDude", $entry->getAuthorUsername());
-        self::assertEquals("https://myanimelist.net/profile/DatRandomDude", $entry->getAuthorUrl());
-        self::assertEquals("https://cdn.myanimelist.net/s/common/uploaded_files/1744151968-b76d21ecfe8b663a399f54a684f41e37.png?s=e3d8fd7416ebf775f8680dea57bd06d8", $entry->getImages()->getJpg()->getImageUrl());
-        self::assertEquals(0, $entry->getComments());
-        self::assertStringContainsString("An official website opened for a television anime adaptation", $entry->getExcerpt());
-        self::assertCount(2, $entry->getTags());
+        self::assertEquals("nirererin", $entry->getAuthorUsername());
+
+        $this->assertIsString($entry->getAuthorUrl());
+        $this->assertNotFalse(filter_var($entry->getAuthorUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/profile/', parse_url($entry->getAuthorUrl())['path']);
+
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
+            $entry->getImages()->getJpg()->getImageUrl()
+        );
+        self::assertEquals(17, $entry->getComments());
+        self::assertStringContainsString("Production company Kadokawa opened an official website for the television anime adaptation of Sanji Jiksong and", $entry->getExcerpt());
+        self::assertCount(4, $entry->getTags());
         self::assertEquals("Adapts Manga", (string) $entry->getTags()[0]);
     }
 }

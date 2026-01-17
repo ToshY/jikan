@@ -102,7 +102,7 @@ class SeasonalAnimeParserTest extends TestCase
     #[Test]
     public function it_gets_the_air_members()
     {
-        self::assertEquals(20000000, $this->parser->getMembers());
+        self::assertEquals(23000000, $this->parser->getMembers());
     }
 
     #[Test]
@@ -134,7 +134,7 @@ class SeasonalAnimeParserTest extends TestCase
     {
         $parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
         self::assertEquals(
-            7.95,
+            7.92,
             $parser2->getAnimeScore()
         );
     }

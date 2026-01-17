@@ -35,8 +35,8 @@ class AnimeSearchTest extends TestCase
     #[Test]
     public function it_gets_the_image_url()
     {
-        self::assertEquals(
-            "https://cdn.myanimelist.net/images/anime/1522/117645.jpg?s=e54dcf99dc0874bc5b228ebe8496c857",
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
             $this->anime->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -83,7 +83,7 @@ class AnimeSearchTest extends TestCase
     #[Test]
     public function it_gets_the_members()
     {
-        self::assertEquals(1106026, $this->anime->getMembers());
+        self::assertEquals(1182927, $this->anime->getMembers());
     }
 
     #[Test]
@@ -95,6 +95,6 @@ class AnimeSearchTest extends TestCase
     #[Test]
     public function it_gets_the_score()
     {
-        self::assertEquals(8.55, $this->anime->getScore());
+        self::assertEquals(8.54, $this->anime->getScore());
     }
 }

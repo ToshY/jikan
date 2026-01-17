@@ -40,11 +40,21 @@ class NewsByTagTest extends TestCase
         $entry = $this->parser->getResults()[0];
 
         self::assertEquals(72151278, $entry->getMalId());
-        self::assertEquals("https://myanimelist.net/news/72151278", $entry->getUrl());
+        $this->assertIsString($entry->getUrl());
+        $this->assertNotFalse(filter_var($entry->getUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/news/', parse_url($entry->getUrl())['path']);
+
         self::assertInstanceOf(\DateTimeImmutable::class, $entry->getDate());
         self::assertEquals("Vindstot", $entry->getAuthorUsername());
-        self::assertEquals("https://myanimelist.net/profile/Vindstot", $entry->getAuthorUrl());
-        self::assertEquals("https://cdn.myanimelist.net/s/common/uploaded_files/1734755485-2e3720eda48f241b354707a867bcb0bd.jpeg?s=338a34101aaab494b01e445a779068d4", $entry->getImages()->getJpg()->getImageUrl());
+
+        $this->assertIsString($entry->getAuthorUrl());
+        $this->assertNotFalse(filter_var($entry->getAuthorUrl(), FILTER_VALIDATE_URL));
+        $this->assertStringStartsWith('/profile/', parse_url($entry->getAuthorUrl())['path']);
+
+        self::assertMatchesRegularExpression(
+            '~https://cdn\.myanimelist\.net/.*~',
+            $entry->getImages()->getJpg()->getImageUrl()
+        );
         self::assertEquals(0, $entry->getComments());
         self::assertStringContainsString("The Rurouni Kenshin: Meiji Kenkaku Romantan - Kyoto Douran", $entry->getExcerpt());
         self::assertCount(5, $entry->getTags());
