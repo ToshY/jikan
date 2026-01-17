@@ -11,21 +11,21 @@ class Jpg
     /**
      * @var string|null
      */
-    private $imageUrl;
+    private ?string $imageUrl;
 
     /**
      * @var string|null
      */
-    private $smallImageUrl;
+    private ?string $smallImageUrl;
 
     /**
      * @var string|null
      */
-    private $largeImageUrl;
+    private ?string $largeImageUrl;
 
 
     /**
-     * @param string $imageUrl
+     * @param string|null $imageUrl
      * @return Jpg
      */
     public static function factory(?string $imageUrl): self

@@ -11,15 +11,15 @@ class CommonImageResource
     /**
      * @var Jpg
      */
-    private $jpg;
+    private Jpg $jpg;
 
     /**
      * @var Webp
      */
-    private $webp;
+    private Webp $webp;
 
     /**
-     * @param string $imageUrl
+     * @param string|null $imageUrl
      * @return CommonImageResource
      */
     public static function factory(?string $imageUrl): self

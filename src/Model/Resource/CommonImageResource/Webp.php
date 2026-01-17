@@ -11,17 +11,17 @@ class Webp
     /**
      * @var string|null
      */
-    private $imageUrl;
+    private ?string $imageUrl;
 
     /**
      * @var string|null
      */
-    private $smallImageUrl;
+    private ?string $smallImageUrl;
 
     /**
      * @var string|null
      */
-    private $largeImageUrl;
+    private ?string $largeImageUrl;
 
 
     /**
@@ -32,11 +32,11 @@ class Webp
     {
         $instance = new self();
 
-        $instance->imageUrl = str_replace('.jpg', '.webp', $imageUrl);
-
-        if ($instance->imageUrl === null) {
+        if ($imageUrl === null) {
             return $instance;
         }
+
+        $instance->imageUrl = str_replace('.jpg', '.webp', $imageUrl);
 
         $instance->smallImageUrl = str_replace('.jpg', 't.webp', $imageUrl);
         $instance->largeImageUrl = str_replace('.jpg', 'l.webp', $imageUrl);

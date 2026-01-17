@@ -3,7 +3,7 @@
 namespace Jikan\Model\Resource\AnimeImageResource;
 
 /**
- * Class CommonImageResource
+ * Class AnimeImageResource
  * @package Jikan\Model\Resource\CommonImageResource
  */
 class AnimeImageResource
@@ -19,7 +19,7 @@ class AnimeImageResource
     private $webp;
 
     /**
-     * @param string $imageUrl
+     * @param string|null $imageUrl
      * @return AnimeImageResource
      */
     public static function factory(?string $imageUrl): self
