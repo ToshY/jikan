@@ -29,7 +29,7 @@ class HttpFilesystemCacheClientCallback
      * @param string $cachePath
      * @param HttpClientInterface|null $httpClient
      */
-    public function __construct(string $cachePath, HttpClientInterface $httpClient = null)
+    public function __construct(string $cachePath, ?HttpClientInterface $httpClient = null)
     {
         $this->httpClient = $httpClient ?? HttpClient::create();
         if (!is_dir($cachePath)) {
