@@ -47,7 +47,7 @@ class VideosParser implements ParserInterface
         return $episodes
             ->each(
                 function (Crawler $crawler) {
-                    return (new StreamEpisodeListItemParser($crawler))->getModel();
+                    return new StreamEpisodeListItemParser($crawler)->getModel();
                 }
             );
     }
@@ -69,7 +69,7 @@ class VideosParser implements ParserInterface
         return $promos
             ->each(
                 function (Crawler $crawler) {
-                    return (new PromoListItemParser($crawler))->getModel();
+                    return new PromoListItemParser($crawler)->getModel();
                 }
             );
     }
@@ -90,7 +90,7 @@ class VideosParser implements ParserInterface
         return $node
             ->each(
                 function (Crawler $crawler) {
-                    return (new MusicVideoListItemParser($crawler))->getModel();
+                    return new MusicVideoListItemParser($crawler)->getModel();
                 }
             );
     }

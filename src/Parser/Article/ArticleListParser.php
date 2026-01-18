@@ -51,7 +51,7 @@ class ArticleListParser implements ParserInterface
         return $node
             ->each(
                 function (Crawler $crawler) {
-                    return (new ArticleListItemParser($crawler))->getModel();
+                    return new ArticleListItemParser($crawler)->getModel();
                 }
             );
     }

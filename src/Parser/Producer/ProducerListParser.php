@@ -52,7 +52,7 @@ class ProducerListParser implements ParserInterface
             ->filter('a.genre-name-link')
             ->each(
                 function (Crawler $crawler) {
-                    return (new ProducerListItemParser($crawler))->getModel();
+                    return new ProducerListItemParser($crawler)->getModel();
                 }
             );
     }

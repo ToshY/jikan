@@ -116,10 +116,10 @@ class NewsMetaParser implements ParserInterface
      */
     public function getAuthor(): MalUrl
     {
-        return (new MalUrlParser(
+        return new MalUrlParser(
             $this->crawler
                 ->filterXPath('//span[contains(@class, "information")]/a[1]')
-        ))->getModel();
+        )->getModel();
     }
 
     /**

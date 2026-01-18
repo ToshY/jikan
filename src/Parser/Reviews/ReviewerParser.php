@@ -106,7 +106,7 @@ class ReviewerParser implements ParserInterface
      */
     public function getAnimeScores(): AnimeReviewScores
     {
-        return (new AnimeReviewScoresParser($this->crawler))->getModel();
+        return new AnimeReviewScoresParser($this->crawler)->getModel();
     }
 
     /**
@@ -115,6 +115,6 @@ class ReviewerParser implements ParserInterface
      */
     public function getMangaScores(): MangaReviewScores
     {
-        return (new MangaReviewScoresParser($this->crawler))->getModel();
+        return new MangaReviewScoresParser($this->crawler)->getModel();
     }
 }

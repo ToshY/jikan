@@ -273,7 +273,7 @@ class PersonParser implements ParserInterface
 
         return $node->each(
             function (Crawler $c) {
-                return (new VoiceActingRoleParser($c))->getModel();
+                return new VoiceActingRoleParser($c)->getModel();
             }
         );
     }
@@ -294,7 +294,7 @@ class PersonParser implements ParserInterface
 
         return $node->each(
             function (Crawler $c) {
-                return (new AnimeStaffPositionParser($c))->getModel();
+                return new AnimeStaffPositionParser($c)->getModel();
             }
         );
     }
@@ -315,7 +315,7 @@ class PersonParser implements ParserInterface
 
         return $node->each(
             function (Crawler $c) {
-                return (new PublishedMangaParser($c))->getModel();
+                return new PublishedMangaParser($c)->getModel();
             }
         );
     }

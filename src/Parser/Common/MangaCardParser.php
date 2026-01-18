@@ -71,7 +71,7 @@ class MangaCardParser implements ParserInterface
             ->filterXPath('//span[contains(@class, "producer")]/a')
             ->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
     }
@@ -124,7 +124,7 @@ class MangaCardParser implements ParserInterface
         return $this->crawler->filterXPath('//span[@class="genre"]/a')
             ->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
     }
@@ -139,7 +139,7 @@ class MangaCardParser implements ParserInterface
         return $this->crawler->filterXPath('//span[@class="genre explicit"]/a')
             ->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
     }
@@ -171,7 +171,7 @@ class MangaCardParser implements ParserInterface
         $date = $matches[2];
 
         try {
-            return (new \DateTimeImmutable($date, new \DateTimeZone('JST')))
+            return new \DateTimeImmutable($date, new \DateTimeZone('JST'))
                 ->setTimezone(new \DateTimeZone('UTC'))
                 ->setTime(0, 0);
         } catch (\Exception $e) {
@@ -306,7 +306,7 @@ class MangaCardParser implements ParserInterface
             if (str_contains($node->text(), "Theme") || str_contains($node->text(), "Themes")) {
                 $node->nextAll()->filterXPath('//a')
                     ->each(function (Crawler $c) use (&$malUrl) {
-                        $malUrl[] = (new MalUrlParser($c))->getModel();
+                        $malUrl[] = new MalUrlParser($c)->getModel();
                     });
             }
         });
@@ -331,7 +331,7 @@ class MangaCardParser implements ParserInterface
             if (str_contains($node->text(), "Demographic") || str_contains($node->text(), "Demographics")) {
                 $node->nextAll()->filterXPath('//a')
                     ->each(function (Crawler $c) use (&$malUrl) {
-                        $malUrl[] = (new MalUrlParser($c))->getModel();
+                        $malUrl[] = new MalUrlParser($c)->getModel();
                     });
             }
         });

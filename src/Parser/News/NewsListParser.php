@@ -50,7 +50,7 @@ class NewsListParser implements ParserInterface
         return $node
             ->each(
                 function (Crawler $crawler) {
-                    return (new NewsListItemParser($crawler))->getModel();
+                    return new NewsListItemParser($crawler)->getModel();
                 }
             );
     }

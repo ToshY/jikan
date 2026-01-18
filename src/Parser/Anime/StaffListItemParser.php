@@ -73,7 +73,7 @@ class StaffListItemParser implements ParserInterface
             )
             ->first();
 
-        return (new MalUrlParser($link))->getModel();
+        return new MalUrlParser($link)->getModel();
     }
 
     /**

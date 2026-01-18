@@ -186,7 +186,7 @@ class AnimeParser implements ParserInterface
         return array_merge(
             $titles,
             ...$crawler->filterXPath('//div[contains(@class, "spaceit_pad")]')->each(function ($item) {
-                return (new AlternativeTitleParser($item))->getModel();
+                return new AlternativeTitleParser($item)->getModel();
             })
         );
     }
@@ -307,7 +307,7 @@ class AnimeParser implements ParserInterface
         if ($producer->count() && strpos($producer->ancestors()->text(), 'None found') === false) {
             return $producer->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
         }
@@ -328,7 +328,7 @@ class AnimeParser implements ParserInterface
         if ($licensor->count() && strpos($licensor->ancestors()->text(), 'None found') === false) {
             return $licensor->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
         }
@@ -348,7 +348,7 @@ class AnimeParser implements ParserInterface
         if ($studio->count() && strpos($studio->ancestors()->text(), 'None found') === false) {
             return $studio->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
         }
@@ -387,7 +387,7 @@ class AnimeParser implements ParserInterface
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
         }
@@ -398,7 +398,7 @@ class AnimeParser implements ParserInterface
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
         }
@@ -419,7 +419,7 @@ class AnimeParser implements ParserInterface
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
         }
@@ -430,7 +430,7 @@ class AnimeParser implements ParserInterface
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
         }
@@ -451,7 +451,7 @@ class AnimeParser implements ParserInterface
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
         }
@@ -462,7 +462,7 @@ class AnimeParser implements ParserInterface
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
         }
@@ -483,7 +483,7 @@ class AnimeParser implements ParserInterface
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
         }
@@ -494,7 +494,7 @@ class AnimeParser implements ParserInterface
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
         }
@@ -692,7 +692,7 @@ class AnimeParser implements ParserInterface
 
         return $links
             ->each(function (Crawler $c) {
-                return (new UrlParser($c))->getModel();
+                return new UrlParser($c)->getModel();
             });
     }
 
@@ -710,7 +710,7 @@ class AnimeParser implements ParserInterface
 
         return $links->filterXPath('//a')
             ->each(function (Crawler  $c) {
-                return (new UrlParser($c))->getModel();
+                return new UrlParser($c)->getModel();
             });
     }
 
@@ -760,7 +760,7 @@ class AnimeParser implements ParserInterface
                         }
                     }
 
-                    $related[$relation][] = (new MalUrlParser($links))->getModel();
+                    $related[$relation][] = new MalUrlParser($links)->getModel();
                 }
             );
 
@@ -790,7 +790,7 @@ class AnimeParser implements ParserInterface
 
                     $related[$relation] = $links->each(
                         function (Crawler $c) {
-                            return (new MalUrlParser($c))->getModel();
+                            return new MalUrlParser($c)->getModel();
                         }
                     );
                 }

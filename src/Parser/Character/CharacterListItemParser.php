@@ -41,7 +41,7 @@ class CharacterListItemParser implements ParserInterface
     {
         return $this->crawler->filterXPath('//table[2]/tr')->each(
             function (Crawler $c) {
-                return (new VoiceActorParser($c))->getModel();
+                return new VoiceActorParser($c)->getModel();
             }
         );
     }

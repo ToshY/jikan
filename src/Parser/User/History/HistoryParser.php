@@ -45,7 +45,7 @@ class HistoryParser implements ParserInterface
             )
             ->each(
                 function (Crawler $c) {
-                    return (new HistoryItemParser($c))->getModel();
+                    return new HistoryItemParser($c)->getModel();
                 }
             );
     }

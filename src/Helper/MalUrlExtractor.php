@@ -72,7 +72,7 @@ class MalUrlExtractor
             ->filterXPath($xpath)
             ->each(
                 function (Crawler $c) {
-                    return (new MalUrlParser($c))->getModel();
+                    return new MalUrlParser($c)->getModel();
                 }
             );
     }

@@ -57,7 +57,7 @@ class AnimeSearchParser
         return $results->nextAll()
             ->each(
                 function (Crawler $c) {
-                    return (new AnimeSearchListItemParser($c))->getModel();
+                    return new AnimeSearchListItemParser($c)->getModel();
                 }
             );
     }

@@ -49,7 +49,7 @@ class SeasonListParser
             ->filterXPath('//table[contains(@class, "anime-seasonal-byseason")]//tr')
             ->each(
                 function (Crawler $crawler) {
-                    return (new SeasonListItemParser($crawler))->getModel();
+                    return new SeasonListItemParser($crawler)->getModel();
                 }
             );
     }

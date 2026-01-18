@@ -41,7 +41,7 @@ class CharactersAndStaffParser implements ParserInterface
             ->filterXPath('//div[contains(@class, "anime-character-container")]/table')
             ->each(
                 function (Crawler $crawler) {
-                    return (new CharacterListItemParser($crawler))->getModel();
+                    return new CharacterListItemParser($crawler)->getModel();
                 }
             );
     }
@@ -77,7 +77,7 @@ class CharactersAndStaffParser implements ParserInterface
         return $node
             ->each(
                 function (Crawler $crawler) {
-                    return (new StaffListItemParser($crawler))->getModel();
+                    return new StaffListItemParser($crawler)->getModel();
                 }
             );
     }

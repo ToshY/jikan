@@ -56,7 +56,7 @@ class CharacterSearchParser
             ->filterXPath('//div[@id="content"]/table/tr')
             ->each(
                 function (Crawler $c) {
-                    return (new CharacterSearchListItemParser($c))->getModel();
+                    return new CharacterSearchListItemParser($c)->getModel();
                 }
             );
     }

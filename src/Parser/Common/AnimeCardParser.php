@@ -96,7 +96,7 @@ class AnimeCardParser implements ParserInterface
             if (str_contains($node->text(), "Studio") || str_contains($node->text(), "Studios")) {
                 $node->nextAll()->filterXPath('//a')
                     ->each(function (Crawler $c) use (&$malUrl) {
-                        $malUrl[] = (new MalUrlParser($c))->getModel();
+                        $malUrl[] = new MalUrlParser($c)->getModel();
                     });
             }
         });
@@ -153,7 +153,7 @@ class AnimeCardParser implements ParserInterface
         return $this->crawler->filterXPath('//span[@class="genre"]/a')
             ->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
     }
@@ -168,7 +168,7 @@ class AnimeCardParser implements ParserInterface
         return $this->crawler->filterXPath('//span[@class="genre explicit"]/a')
             ->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
     }
@@ -237,7 +237,7 @@ class AnimeCardParser implements ParserInterface
         );
 
         try {
-            return (new \DateTimeImmutable($date, new \DateTimeZone('JST')))
+            return new \DateTimeImmutable($date, new \DateTimeZone('JST'))
                 ->setTimezone(new \DateTimeZone('UTC'));
         } catch (\Exception $e) {
             return null;
@@ -403,7 +403,7 @@ class AnimeCardParser implements ParserInterface
             if (str_contains($node->text(), "Theme") || str_contains($node->text(), "Themes")) {
                 $node->nextAll()->filterXPath('//a')
                     ->each(function (Crawler $c) use (&$malUrl) {
-                        $malUrl[] = (new MalUrlParser($c))->getModel();
+                        $malUrl[] = new MalUrlParser($c)->getModel();
                     });
             }
         });
@@ -428,7 +428,7 @@ class AnimeCardParser implements ParserInterface
             if (str_contains($node->text(), "Demographic") || str_contains($node->text(), "Demographics")) {
                 $node->nextAll()->filterXPath('//a')
                     ->each(function (Crawler $c) use (&$malUrl) {
-                        $malUrl[] = (new MalUrlParser($c))->getModel();
+                        $malUrl[] = new MalUrlParser($c)->getModel();
                     });
             }
         });

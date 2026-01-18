@@ -46,7 +46,7 @@ class FriendsParser implements ParserInterface
     {
         return $this->crawler->filterXPath('//div[contains(@class, "boxlist-container")]/div[contains(@class, "boxlist")]')->each(
             function (Crawler $c) {
-                return (new FriendParser($c))->getModel();
+                return new FriendParser($c)->getModel();
             }
         );
     }

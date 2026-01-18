@@ -95,7 +95,7 @@ class NewsParser implements ParserInterface
      */
     public function getAuthor(): MalUrl
     {
-        return (new MalUrlParser($this->crawler->filterXPath('//a[contains(@href, "profile")][1]')))->getModel();
+        return new MalUrlParser($this->crawler->filterXPath('//a[contains(@href, "profile")][1]'))->getModel();
     }
 
     /**
@@ -149,7 +149,7 @@ class NewsParser implements ParserInterface
         }
 
         return $node->each(function (Crawler $crawler) use ($node) {
-            return (new TagUrlParser($crawler))->getModel();
+            return new TagUrlParser($crawler)->getModel();
         });
     }
 
@@ -198,7 +198,7 @@ class NewsParser implements ParserInterface
 
                     $related[$relation] = $links->each(
                         function (Crawler $c) {
-                            return (new MalUrlParser($c))->getModel();
+                            return new MalUrlParser($c)->getModel();
                         }
                     );
                 }
@@ -222,7 +222,7 @@ class NewsParser implements ParserInterface
         }
 
         return $relatedNews->each(function (Crawler $crawler) use ($relatedNews) {
-            return (new NewsMetaParser($crawler))->getModel();
+            return new NewsMetaParser($crawler)->getModel();
         });
     }
 }

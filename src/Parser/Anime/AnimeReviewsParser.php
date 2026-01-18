@@ -56,7 +56,7 @@ class AnimeReviewsParser implements ParserInterface
             ->filterXPath('//div[contains(@class, "rightside")]//div[contains(@class, "review-element")]')
             ->each(
                 function (Crawler $c) {
-                    return (new AnimeReviewParser($c))->getModel();
+                    return new AnimeReviewParser($c)->getModel();
                 }
             );
     }

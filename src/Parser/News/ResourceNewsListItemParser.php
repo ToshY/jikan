@@ -107,7 +107,7 @@ class ResourceNewsListItemParser implements ParserInterface
      */
     public function getAuthor(): MalUrl
     {
-        return (new MalUrlParser($this->crawler->filterXPath('//a[contains(@href, "profile")][1]')))->getModel();
+        return new MalUrlParser($this->crawler->filterXPath('//a[contains(@href, "profile")][1]'))->getModel();
     }
 
     /**

@@ -52,7 +52,7 @@ class MagazineParser implements ParserInterface
             ->filter('div.seasonal-anime')
             ->each(
                 function (Crawler $MangaCrawler) {
-                    return (new MangaCardParser($MangaCrawler))->getModel();
+                    return new MangaCardParser($MangaCrawler)->getModel();
                 }
             );
     }

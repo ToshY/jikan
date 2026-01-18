@@ -51,7 +51,7 @@ class ResourceNewsListParser implements ParserInterface
             ->filterXPath('//div[contains(@class,"js-scrollfix-bottom-rel")]/div[@class="clearfix"]')
             ->each(
                 function (Crawler $crawler) {
-                    return (new ResourceNewsListItemParser($crawler))->getModel();
+                    return new ResourceNewsListItemParser($crawler)->getModel();
                 }
             );
     }

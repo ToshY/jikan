@@ -31,7 +31,7 @@ class HttpClientWrapper extends HttpBrowser
         array $parameters = [],
         array $files = [],
         array $server = [],
-        string $content = null,
+        ?string $content = null,
         bool $changeHistory = true
     ): Crawler {
         $response = parent::request(

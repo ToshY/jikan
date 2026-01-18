@@ -67,7 +67,7 @@ class PersonSearchParser
             ->filterXPath('//div[@id="content"]/table/tr')
             ->each(
                 function (Crawler $c) {
-                    return (new PersonSearchListItemParser($c))->getModel();
+                    return new PersonSearchListItemParser($c)->getModel();
                 }
             );
     }

@@ -120,10 +120,10 @@ class NewsListItemParser implements ParserInterface
      */
     public function getAuthor(): MalUrl
     {
-        return (new MalUrlParser(
+        return new MalUrlParser(
             $this->crawler
                 ->filterXPath('//div[contains(@class, "information")]/p/a[1]')
-        ))->getModel();
+        )->getModel();
     }
 
     /**
@@ -184,7 +184,7 @@ class NewsListItemParser implements ParserInterface
         }
 
         return $node->each(function (Crawler $crawler) {
-            return (new TagUrlParser($crawler))->getModel();
+            return new TagUrlParser($crawler)->getModel();
         });
     }
 }

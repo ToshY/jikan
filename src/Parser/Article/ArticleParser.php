@@ -112,7 +112,7 @@ class ArticleParser implements ParserInterface
             return new MalUrl('removed_user', null);
         }
 
-        return (new MalUrlParser($node))->getModel();
+        return new MalUrlParser($node)->getModel();
     }
 
     /**
@@ -160,7 +160,7 @@ class ArticleParser implements ParserInterface
         }
 
         return $node->each(function (Crawler $crawler) use ($node) {
-            return (new TagUrlParser($crawler))->getModel();
+            return new TagUrlParser($crawler)->getModel();
         });
     }
 
@@ -213,7 +213,7 @@ class ArticleParser implements ParserInterface
 
                     $related[$relation] = $links->each(
                         function (Crawler $c) {
-                            return (new MalUrlParser($c))->getModel();
+                            return new MalUrlParser($c)->getModel();
                         }
                     );
                 }
@@ -241,7 +241,7 @@ class ArticleParser implements ParserInterface
         }
 
         return $relatedArticles->each(function (Crawler $crawler) use ($relatedArticles) {
-            return (new ArticleListItemParser($crawler))->getModel();
+            return new ArticleListItemParser($crawler)->getModel();
         });
     }
 }

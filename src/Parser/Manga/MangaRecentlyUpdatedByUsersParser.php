@@ -41,7 +41,7 @@ class MangaRecentlyUpdatedByUsersParser
                 ->nextAll()
                 ->each(
                     function ($c) {
-                        return (new MangaRecentlyUpdatedByUsersListParser($c))->getModel();
+                        return new MangaRecentlyUpdatedByUsersListParser($c)->getModel();
                     }
                 );
         } catch (\Exception $e) {

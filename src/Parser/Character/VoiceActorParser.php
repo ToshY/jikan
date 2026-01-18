@@ -119,14 +119,14 @@ class VoiceActorParser implements ParserInterface
      */
     public function getPerson(): Model\Common\MalUrl
     {
-        return (new MalUrlParser(
+        return new MalUrlParser(
             $this->crawler->filterXPath('//a')
                 ->reduce(
                     function (Crawler $crawler) {
                         return !$crawler->filter('img')->count();
                     }
                 )
-        ))->getModel();
+        )->getModel();
     }
 
     /**

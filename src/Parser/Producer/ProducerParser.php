@@ -53,7 +53,7 @@ class ProducerParser implements ParserInterface
             ->filterXPath('//*[@id="content"]/div[2]/div[contains(@class, "js-categories-seasonal")]/div[contains(@class, "seasonal-anime")]')
             ->each(
                 function (Crawler $animeCrawler) {
-                    return (new AnimeCardParser($animeCrawler))->getModel();
+                    return new AnimeCardParser($animeCrawler)->getModel();
                 }
             );
     }
@@ -252,7 +252,7 @@ class ProducerParser implements ParserInterface
 
         $links = array_merge($links, $availableAtLinks
             ->each(function (Crawler $c) {
-                return (new UrlParser($c))->getModel();
+                return new UrlParser($c)->getModel();
             }));
 
 
@@ -265,7 +265,7 @@ class ProducerParser implements ParserInterface
 
         $links = array_merge($links, $resourcesLinks
             ->each(function (Crawler $c) {
-                return (new UrlParser($c))->getModel();
+                return new UrlParser($c)->getModel();
             }));
 
         return $links;

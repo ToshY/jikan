@@ -52,7 +52,7 @@ class PinnedArticleListParser implements ParserInterface
         return $node
             ->each(
                 function (Crawler $crawler) {
-                    return (new PinnedArticleListItemParser($crawler))->getModel();
+                    return new PinnedArticleListItemParser($crawler)->getModel();
                 }
             );
     }

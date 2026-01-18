@@ -46,7 +46,7 @@ class UserListParser implements ParserInterface
             ->filterXPath('//*[@id="content"]/table/tr/td')
             ->each(
                 function (Crawler $crawler) {
-                    return (new UserProfileParser($crawler))->getModel();
+                    return new UserProfileParser($crawler)->getModel();
                 }
             );
     }

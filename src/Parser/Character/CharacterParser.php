@@ -116,7 +116,7 @@ class CharacterParser implements ParserInterface
         $aboutHtml = $crawler->html();
 
         $aboutHtml = str_replace(['<br>'], '\n', $aboutHtml);
-        $about = Parser::removeChildNodes((new Crawler($aboutHtml))->filterXPath('//body'));
+        $about = Parser::removeChildNodes(new Crawler($aboutHtml)->filterXPath('//body'));
 
         $string = JString::cleanse(
             $about->html()
@@ -160,7 +160,7 @@ class CharacterParser implements ParserInterface
             ->filterXPath('//div[contains(text(), \'Animeography\')]/../table[1]/tr')
             ->each(
                 function (Crawler $c) {
-                    return (new AnimeographyParser($c))->getModel();
+                    return new AnimeographyParser($c)->getModel();
                 }
             );
     }
@@ -175,7 +175,7 @@ class CharacterParser implements ParserInterface
             ->filterXPath('//div[contains(text(), \'Mangaography\')]/../table[2]/tr')
             ->each(
                 function (Crawler $c) {
-                    return (new MangaographyParser($c))->getModel();
+                    return new MangaographyParser($c)->getModel();
                 }
             );
     }
@@ -191,7 +191,7 @@ class CharacterParser implements ParserInterface
             ->filterXPath('//div[contains(text(), \'Voice Actors\')]/../table/tr')
             ->each(
                 function (Crawler $c) {
-                    return (new VoiceActorParser($c))->getModel();
+                    return new VoiceActorParser($c)->getModel();
                 }
             );
     }

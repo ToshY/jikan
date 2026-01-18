@@ -45,7 +45,7 @@ class MangaReviewsParser implements ParserInterface
             ->filterXPath('//div[contains(@class, "rightside")]//div[contains(@class, "review-element")]')
             ->each(
                 function (Crawler $c) {
-                    return (new MangaReviewParser($c))->getModel();
+                    return new MangaReviewParser($c)->getModel();
                 }
             );
     }

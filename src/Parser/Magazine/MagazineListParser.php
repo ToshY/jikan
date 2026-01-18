@@ -49,7 +49,7 @@ class MagazineListParser implements ParserInterface
             ->filter('a.genre-name-link')
             ->each(
                 function (Crawler $crawler) {
-                    return (new MagazineListItemParser($crawler))->getModel();
+                    return new MagazineListItemParser($crawler)->getModel();
                 }
             );
     }

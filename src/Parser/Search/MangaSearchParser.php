@@ -57,7 +57,7 @@ class MangaSearchParser
         return $results->nextAll()
             ->each(
                 function (Crawler $c) {
-                    return (new MangaSearchListItemParser($c))->getModel();
+                    return new MangaSearchListItemParser($c)->getModel();
                 }
             );
     }

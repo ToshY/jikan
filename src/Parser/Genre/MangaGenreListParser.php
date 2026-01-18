@@ -48,7 +48,7 @@ class MangaGenreListParser implements ParserInterface
         return $this->crawler
             ->filterXPath('//*[@class="genre-link"][1]/div/div/a[@class="genre-name-link"]')
             ->each(function (Crawler $crawler) {
-                return (new MangaGenreListItemParser($crawler))->getModel();
+                return new MangaGenreListItemParser($crawler)->getModel();
             });
     }
 
@@ -62,7 +62,7 @@ class MangaGenreListParser implements ParserInterface
         return $this->crawler
             ->filterXPath('//*[@class="genre-link"][2]/div/div/a[@class="genre-name-link"]')
             ->each(function (Crawler $crawler) {
-                return (new MangaGenreListItemParser($crawler))->getModel();
+                return new MangaGenreListItemParser($crawler)->getModel();
             });
     }
 
@@ -76,7 +76,7 @@ class MangaGenreListParser implements ParserInterface
         return $this->crawler
             ->filterXPath('//*[@class="genre-link"][3]/div/div/a[@class="genre-name-link"]')
             ->each(function (Crawler $crawler) {
-                return (new MangaGenreListItemParser($crawler))->getModel();
+                return new MangaGenreListItemParser($crawler)->getModel();
             });
     }
 
@@ -90,7 +90,7 @@ class MangaGenreListParser implements ParserInterface
         return $this->crawler
             ->filterXPath('//*[@class="genre-link"][4]/div/div/a[@class="genre-name-link"]')
             ->each(function (Crawler $crawler) {
-                return (new MangaGenreListItemParser($crawler))->getModel();
+                return new MangaGenreListItemParser($crawler)->getModel();
             });
     }
 }

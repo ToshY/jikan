@@ -174,7 +174,7 @@ class UserProfileParser
         $this->crawler
             ->filterXPath('//div[@class=\'stats anime\']');
 
-        return (new AnimeStatsParser($this->crawler))->getModel();
+        return new AnimeStatsParser($this->crawler)->getModel();
     }
 
     /**
@@ -186,7 +186,7 @@ class UserProfileParser
         $this->crawler
             ->filterXPath('//div[@class=\'stats anime\']');
 
-        return (new MangaStatsParser($this->crawler))->getModel();
+        return new MangaStatsParser($this->crawler)->getModel();
     }
 
     /**
@@ -216,7 +216,7 @@ class UserProfileParser
         // $node = $this->crawler->filterXPath('//ul[@class=\'favorites-list anime\']/li')
         $node = $this->crawler->filterXPath('//div[contains(@class, \'container-right\')]');
 
-        return (new FavoritesParser($node))->getModel();
+        return new FavoritesParser($node)->getModel();
     }
 
     /**
@@ -224,7 +224,7 @@ class UserProfileParser
      */
     public function getUserLastUpdates(): Model\User\LastUpdates
     {
-        return (new LastUpdatesParser($this->crawler))->getModel();
+        return new LastUpdatesParser($this->crawler)->getModel();
     }
 
     /**
@@ -241,7 +241,7 @@ class UserProfileParser
         }
 
         return $links->each(function (Crawler  $c) {
-            return (new UrlParser($c))->getModel();
+            return new UrlParser($c)->getModel();
         });
     }
 }

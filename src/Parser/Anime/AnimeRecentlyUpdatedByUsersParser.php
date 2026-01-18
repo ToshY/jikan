@@ -40,7 +40,7 @@ class AnimeRecentlyUpdatedByUsersParser
                 ->nextAll()
                 ->each(
                     function ($c) {
-                        return (new AnimeRecentlyUpdatedByUsersListParser($c))->getModel();
+                        return new AnimeRecentlyUpdatedByUsersListParser($c)->getModel();
                     }
                 );
         } catch (\Exception $e) {

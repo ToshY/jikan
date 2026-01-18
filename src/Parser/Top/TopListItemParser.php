@@ -46,21 +46,21 @@ class TopListItemParser
         $node = $this->crawler->filterXPath('//td[contains(@class, "title")]/div/div/h3/a');
 
         if ($node->count()) {
-            return (new MalUrlParser($node))->getModel();
+            return new MalUrlParser($node)->getModel();
         }
 
         // For Manga
         $node = $this->crawler->filterXPath('//td[contains(@class, "title")]/div/h3/a');
 
         if ($node->count()) {
-            return (new MalUrlParser($node))->getModel();
+            return new MalUrlParser($node)->getModel();
         }
 
         // For Characters/People
         $node = $this->crawler->filterXPath('//td[contains(@class, "people")]/div/a');
 
         if ($node->count()) {
-            return (new MalUrlParser($node))->getModel();
+            return new MalUrlParser($node)->getModel();
         }
 
         throw new ParserException('Failed to parse MalUrl');
@@ -209,7 +209,7 @@ class TopListItemParser
         return $this->crawler->filterXPath('//td[3]/div/a')
             ->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
     }
@@ -223,7 +223,7 @@ class TopListItemParser
         return $this->crawler->filterXPath('//td[4]/div/a')
             ->each(
                 function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                    return new MalUrlParser($crawler)->getModel();
                 }
             );
     }

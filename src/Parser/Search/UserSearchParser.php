@@ -61,7 +61,7 @@ class UserSearchParser
 
         $data = $node
             ->each(function (Crawler $c) {
-                return (new UserSearchListItemParser($c))->getModel();
+                return new UserSearchListItemParser($c)->getModel();
             });
 
         // If only a single result is found, the $data array will be empty

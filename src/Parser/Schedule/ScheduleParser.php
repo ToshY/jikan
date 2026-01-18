@@ -57,7 +57,7 @@ class ScheduleParser implements ParserInterface
 
         return $this->crawler->filterXPath($query)->each(
             function (Crawler $c) {
-                return (new AnimeCardParser($c))->getModel();
+                return new AnimeCardParser($c)->getModel();
             }
         );
     }

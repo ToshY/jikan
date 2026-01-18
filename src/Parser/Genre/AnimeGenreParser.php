@@ -52,7 +52,7 @@ class AnimeGenreParser implements ParserInterface
             ->filter('div.seasonal-anime')
             ->each(
                 function (Crawler $animeCrawler) {
-                    return (new AnimeCardParser($animeCrawler))->getModel();
+                    return new AnimeCardParser($animeCrawler)->getModel();
                 }
             );
     }
