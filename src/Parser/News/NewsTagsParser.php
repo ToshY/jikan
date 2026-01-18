@@ -51,7 +51,7 @@ class NewsTagsParser implements ParserInterface
                         ->text();
 
                     return $crawler
-                        ->filterXPath('//table/tr')
+                        ->filterXPath('//table/tbody/tr')
                         ->each(function (Crawler $crawler) use ($type) {
                             return new TagMeta(
                                 $crawler->filterXPath('//td[contains(@class, "tag-name")]/span/a')->text(),

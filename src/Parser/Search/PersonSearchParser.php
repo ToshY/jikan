@@ -64,7 +64,7 @@ class PersonSearchParser
         }
 
         return $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr')
             ->each(
                 function (Crawler $c) {
                     return new PersonSearchListItemParser($c)->getModel();

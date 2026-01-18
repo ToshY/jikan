@@ -39,7 +39,7 @@ class CharacterListItemParser implements ParserInterface
      */
     public function getVoiceActors(): array
     {
-        return $this->crawler->filterXPath('//table[2]/tr')->each(
+        return $this->crawler->filterXPath('//table[2]/tbody/tr')->each(
             function (Crawler $c) {
                 return new VoiceActorParser($c)->getModel();
             }

@@ -43,14 +43,14 @@ class MangaReviewScoresParser implements ParserInterface
      */
     public function getOverallScore(): int
     {
-        return (int) $this->crawler->filterXPath('//table/tr[1]/td[2]/strong')->text();
+        return (int) $this->crawler->filterXPath('//table/tbody/tr[1]/td[2]/strong')->text();
     }
     /**
      * @return int
      */
     public function getStoryScore(): int
     {
-        return (int) $this->crawler->filterXPath('//table/tr[2]/td[2]')->text();
+        return (int) $this->crawler->filterXPath('//table/tbody/tr[2]/td[2]')->text();
     }
 
     /**
@@ -58,7 +58,7 @@ class MangaReviewScoresParser implements ParserInterface
      */
     public function getArtScore(): int
     {
-        return (int) $this->crawler->filterXPath('//table/tr[3]/td[2]')->text();
+        return (int) $this->crawler->filterXPath('//table/tbody/tr[3]/td[2]')->text();
     }
 
     /**
@@ -66,7 +66,7 @@ class MangaReviewScoresParser implements ParserInterface
      */
     public function getCharacterScore(): int
     {
-        return (int) $this->crawler->filterXPath('//table/tr[4]/td[2]')->text();
+        return (int) $this->crawler->filterXPath('//table/tbody/tr[4]/td[2]')->text();
     }
 
     /**
@@ -74,6 +74,6 @@ class MangaReviewScoresParser implements ParserInterface
      */
     public function getEnjoymentScore(): int
     {
-        return (int) $this->crawler->filterXPath('//table/tr[5]/td[2]')->text();
+        return (int) $this->crawler->filterXPath('//table/tbody/tr[5]/td[2]')->text();
     }
 }

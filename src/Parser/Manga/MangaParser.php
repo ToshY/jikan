@@ -21,10 +21,7 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class MangaParser implements ParserInterface
 {
-    /**
-     * @var Crawler
-     */
-    private $crawler;
+    private \Symfony\Component\DomCrawler\Crawler $crawler;
 
     /**
      * MangaParser constructor.
@@ -125,7 +122,7 @@ class MangaParser implements ParserInterface
     public function getMangaTitleEnglish(): ?string
     {
         $title = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="English:"]');
         if (!$title->count()) {
             return null;
@@ -143,7 +140,7 @@ class MangaParser implements ParserInterface
     public function getMangaTitleSynonyms(): array
     {
         $title = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Synonyms:"]');
 
         if (!$title->count()) {
@@ -167,7 +164,7 @@ class MangaParser implements ParserInterface
     public function getMangaTitleJapanese(): ?string
     {
         $title = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Japanese:"]');
         if (!$title->count()) {
             return null;
@@ -210,7 +207,7 @@ class MangaParser implements ParserInterface
     public function getMangaType(): ?string
     {
         $type = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Type:"]');
         if (!$type->count()) {
             return null;
@@ -227,7 +224,7 @@ class MangaParser implements ParserInterface
     public function getMangaChapters(): ?int
     {
         $chapters = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Chapters:"]');
 
         if (!$chapters->count()) {
@@ -255,7 +252,7 @@ class MangaParser implements ParserInterface
     public function getMangaVolumes(): ?int
     {
         $volumes = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Volumes:"]');
 
         if (!$volumes->count()) {
@@ -283,7 +280,7 @@ class MangaParser implements ParserInterface
     public function getMangaStatus(): ?string
     {
         $status = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Status:"]');
         if (!$status->count()) {
             return null;
@@ -510,7 +507,7 @@ class MangaParser implements ParserInterface
     public function getMangaRank(): ?int
     {
         $rank = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Ranked:"]');
 
         if (!$rank->count()) {
@@ -536,7 +533,7 @@ class MangaParser implements ParserInterface
     public function getMangaPopularity(): ?int
     {
         $popularity = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Popularity:"]');
 
         if (!$popularity->count()) {
@@ -555,7 +552,7 @@ class MangaParser implements ParserInterface
     public function getMangaMembers(): ?int
     {
         $member = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Members:"]');
 
         if (!$member->count()) {
@@ -574,7 +571,7 @@ class MangaParser implements ParserInterface
     public function getMangaFavorites(): ?int
     {
         $favorite = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Favorites:"]');
 
         if (!$favorite->count()) {
@@ -702,7 +699,7 @@ class MangaParser implements ParserInterface
             return null;
         }
         $background = $background->text();
-        if (preg_match('~No background information has been added to this title~', $background)) {
+        if (str_contains($background, 'No background information has been added to this title')) {
             return null;
         }
 
@@ -725,7 +722,7 @@ class MangaParser implements ParserInterface
     public function getMangaPublishedString(): ?string
     {
         $aired = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Published:"]');
 
         if (!$aired->count()) {

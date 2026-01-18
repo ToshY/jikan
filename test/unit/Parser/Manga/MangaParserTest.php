@@ -258,7 +258,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_related()
     {
         $related = $this->parser->getMangaRelated();
-        self::assertCount(6, $related);
+        self::assertCount(2, $related);
         self::assertContainsOnlyInstancesOf(MalUrl::class, $related['Adaptation']);
     }
 

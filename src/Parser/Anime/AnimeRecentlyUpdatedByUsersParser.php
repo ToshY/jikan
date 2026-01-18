@@ -36,7 +36,7 @@ class AnimeRecentlyUpdatedByUsersParser
     {
         try {
             return $this->crawler
-                ->filterXPath('//table[@class="table-recently-updated"]/tr[1]')
+                ->filterXPath('//table[@class="table-recently-updated"]/tbody/tr[1]')
                 ->nextAll()
                 ->each(
                     function ($c) {

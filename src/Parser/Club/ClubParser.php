@@ -65,7 +65,7 @@ class ClubParser implements ParserInterface
     {
         return Parser::parseImageQuality(
             $this->crawler
-                ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[1]/img')
+                ->filterXPath('//div[@id="content"]/table/tbody/tr/td[2]/div/div[1]/img')
                 ->attr('data-src')
         );
     }
@@ -85,7 +85,7 @@ class ClubParser implements ParserInterface
     {
         return (int) Parser::removeChildNodes(
             $this->crawler
-                ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[4]')
+                ->filterXPath('//div[@id="content"]/table/tbody/tr/td[2]/div/div[4]')
         )->text();
     }
 
@@ -96,7 +96,7 @@ class ClubParser implements ParserInterface
     {
         return (int) Parser::removeChildNodes(
             $this->crawler
-                ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[5]')
+                ->filterXPath('//div[@id="content"]/table/tbody/tr/td[2]/div/div[5]')
         )->text();
     }
 
@@ -108,7 +108,7 @@ class ClubParser implements ParserInterface
         $category = JString::cleanse(
             Parser::removeChildNodes(
                 $this->crawler
-                    ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[6]')
+                    ->filterXPath('//div[@id="content"]/table/tbody/tr/td[2]/div/div[6]')
             )->text()
         );
 
@@ -122,7 +122,7 @@ class ClubParser implements ParserInterface
     public function getCreated(): \DateTimeImmutable
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[contains(., "Created")]');
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[2]/div/div[contains(., "Created")]');
 
         $date = JString::cleanse(
             Parser::removeChildNodes($node)
@@ -139,7 +139,7 @@ class ClubParser implements ParserInterface
     {
         $typeNode = JString::cleanse(
             $this->crawler
-                ->filterXPath('//div[@id="content"]/table/tr/td[2]/div')
+                ->filterXPath('//div[@id="content"]/table/tbody/tr/td[2]/div')
                 ->text()
         );
 

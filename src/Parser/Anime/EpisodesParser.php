@@ -56,7 +56,7 @@ class EpisodesParser implements ParserInterface
     public function getLastPage(): int
     {
         $pages = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[2]/div//a[contains(@class, "link")]');
+            ->filterXPath('//*[@id="content"]/table/tbody/tr/td[2]/div[2]/div[2]/div[2]/div//a[contains(@class, "link")]');
 
         if (!$pages->count()) {
             return 1;
@@ -80,7 +80,7 @@ class EpisodesParser implements ParserInterface
     public function getHasNextPage(): bool
     {
         $isBeyondLastPage = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div/div[2]/table/tbody/tr/td/div[2]');
+            ->filterXPath('//*[@id="content"]/table/tbody/tr/td[2]/div/div[2]/table/tbody/tr/td/div[2]');
 
         if (
             $isBeyondLastPage->count()
@@ -90,14 +90,14 @@ class EpisodesParser implements ParserInterface
         }
 
         $pageLinks = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[2]/div//a[contains(@class, "link")]');
+            ->filterXPath('//*[@id="content"]/table/tbody/tr/td[2]/div[2]/div[2]/div[2]/div//a[contains(@class, "link")]');
 
         if (!$pageLinks->count()) {
             return false;
         }
 
         $isLastPage = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[2]/div//a[contains(@class, "current") and position() = last()]');
+            ->filterXPath('//*[@id="content"]/table/tbody/tr/td[2]/div[2]/div[2]/div[2]/div//a[contains(@class, "current") and position() = last()]');
 
         if ($isLastPage->count()) {
             return false;

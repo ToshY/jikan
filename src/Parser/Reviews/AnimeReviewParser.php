@@ -149,19 +149,19 @@ class AnimeReviewParser implements ParserInterface
         return 0; //@todo replace with reactions array
 
         // works on Profile pages
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[1]/div/strong/span');
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tbody/tr/td[1]/div/strong/span');
         if ($node->count()) {
             return $node->text();
         }
 
         // works on Anime/Manga Review pages
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[2]/div/strong/span');
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tbody/tr/td[2]/div/strong/span');
         if ($node->count()) {
             return $node->text();
         }
 
         // works on Top UserReviewsParser pages, the div is shifted
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[2]/div/strong/span');
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tbody/tr/td[2]/div/strong/span');
         return $node->text();
     }
 

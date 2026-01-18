@@ -114,7 +114,7 @@ class PersonParser implements ParserInterface
     public function getPersonFamilyName(): ?string
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]/span[text()="Family name:"]');
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]/span[text()="Family name:"]');
 
         if (!$node->count()) {
             return null;
@@ -147,7 +147,7 @@ class PersonParser implements ParserInterface
     public function getPersonAlternateNames(): array
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]/div/span[text()="Alternate names:"]');
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]/div/span[text()="Alternate names:"]');
 
         if (!$node->count()) {
             return [];
@@ -173,7 +173,7 @@ class PersonParser implements ParserInterface
     public function getPersonWebsite(): ?string
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]/span[text()="Website:"]');
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]/span[text()="Website:"]');
 
 
         $website = $node->nextAll()->filter('a');
@@ -240,7 +240,7 @@ class PersonParser implements ParserInterface
     public function getPersonAbout(): ?string
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//div[@id="content"]/table/tbody/tr/td[@class="borderClass"]')
             ->filter('.people-informantion-more');
 
         if (!$node->count()) {
@@ -265,7 +265,7 @@ class PersonParser implements ParserInterface
     public function getPersonVoiceActingRoles(): array
     {
         $node = $this->crawler
-            ->filterXPath('//table[contains(@class, "js-table-people-character")]/tr[contains(@class, "js-people-character")]');
+            ->filterXPath('//table[contains(@class, "js-table-people-character")]/tbody/tr[contains(@class, "js-people-character")]');
 
         if (!$node->count()) {
             return [];
@@ -286,7 +286,7 @@ class PersonParser implements ParserInterface
     public function getPersonAnimeStaffPositions(): array
     {
         $node = $this->crawler
-            ->filterXPath('//table[contains(@class, "js-table-people-staff")]/tr[contains(@class, "js-people-staff")]');
+            ->filterXPath('//table[contains(@class, "js-table-people-staff")]/tbody/tr[contains(@class, "js-people-staff")]');
 
         if (!$node->count()) {
             return [];

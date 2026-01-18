@@ -52,7 +52,7 @@ class ReviewerParser implements ParserInterface
         }
 
         // works on Top UserReviewsParser pages, the div is shifted
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[2]/a');
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tbody/tr/td[2]/a');
         if ($node->count()) {
             return $node->attr('href');
         }
@@ -74,7 +74,7 @@ class ReviewerParser implements ParserInterface
 
         // works on Top UserReviewsParser pages, the div is shifted
         return $this->crawler
-            ->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[2]/a')
+            ->filterXPath('//div[1]/div[1]/div[4]/table/tbody/tr/td[2]/a')
             ->text();
     }
 
@@ -93,7 +93,7 @@ class ReviewerParser implements ParserInterface
         }
 
         // works on Top UserReviewsParser pages, the div is shifted
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[1]/div/a/img');
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tbody/tr/td[1]/div/a/img');
         return Parser::parseImageThumbToHQ(
             $node
                 ->attr('src')

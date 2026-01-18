@@ -45,7 +45,7 @@ class RecommendationListItemParser implements ParserInterface
     public function getRecommendations(): array
     {
         return $this->crawler
-            ->filterXPath('//table/tr/td')
+            ->filterXPath('//table/tbody/tr/td')
             ->each(function (Crawler $crawler) {
                 return new Model\Common\CommonMeta(
                     $crawler->filterXPath('//a/strong')->text(),

@@ -51,12 +51,12 @@ class UserSearchParser
         // Check if it's the main page
         // For `getRecentlyOnlineUsers`
         $node = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[1]/table/tr/td');
+            ->filterXPath('//*[@id="content"]/table/tbody/tr/td[1]/table/tbody/tr/td');
 
         // User search page
         if (!$node->count()) {
             $node = $this->crawler
-                ->filterXPath('//*[@id="content"]/table/tr/td');
+                ->filterXPath('//*[@id="content"]/table/tbody/tr/td');
         }
 
         $data = $node
