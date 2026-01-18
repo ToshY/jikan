@@ -10,3 +10,4 @@ composer.phar
 .phive
 /.phpunit.cache
 *.Identifier
+qodana.yaml
