@@ -48,7 +48,7 @@ class AnimeReviewParser implements ParserInterface
     /**
      * @return AnimeMeta
      */
-    public function getAnime(string $page = null): AnimeMeta
+    public function getAnime(?string $page = null): AnimeMeta
     {
         return match ($page) {
             'user' => new AnimeMeta(
@@ -206,7 +206,7 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getReviewer(): Reviewer
     {
-        return (new ReviewerParser($this->crawler))->getModel();
+        return new ReviewerParser($this->crawler)->getModel();
     }
 
     /**
@@ -215,7 +215,7 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getAnimeScores(): AnimeReviewScores
     {
-        return (new AnimeReviewScoresParser($this->crawler))->getModel();
+        return new AnimeReviewScoresParser($this->crawler)->getModel();
     }
 
     /**
@@ -278,7 +278,7 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getReactions(): Reactions
     {
-        return (new ReactionsParser($this->crawler))->getModel();
+        return new ReactionsParser($this->crawler)->getModel();
     }
 
     /**

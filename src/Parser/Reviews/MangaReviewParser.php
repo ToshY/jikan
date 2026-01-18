@@ -49,7 +49,7 @@ class MangaReviewParser implements ParserInterface
     /**
      * @throws \Jikan\Exception\ParserException
      */
-    public function getManga(string $page = null): MangaMeta
+    public function getManga(?string $page = null): MangaMeta
     {
         return match ($page) {
             'user' => new MangaMeta(
@@ -150,7 +150,7 @@ class MangaReviewParser implements ParserInterface
      */
     public function getReviewer(): Reviewer
     {
-        return (new ReviewerParser($this->crawler))->getModel();
+        return new ReviewerParser($this->crawler)->getModel();
     }
 
     /**
@@ -159,7 +159,7 @@ class MangaReviewParser implements ParserInterface
      */
     public function getMangaScores(): MangaReviewScores
     {
-        return (new MangaReviewScoresParser($this->crawler))->getModel();
+        return new MangaReviewScoresParser($this->crawler)->getModel();
     }
 
     /**
@@ -276,7 +276,7 @@ class MangaReviewParser implements ParserInterface
      */
     public function getReactions(): Reactions
     {
-        return (new ReactionsParser($this->crawler))->getModel();
+        return new ReactionsParser($this->crawler)->getModel();
     }
 
     /**
