@@ -112,7 +112,9 @@ class CharacterParser implements ParserInterface
      */
     public function getAbout(): ?string
     {
-        $crawler = $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[2]');
+
+        $crawler = $this->crawler->filterXPath('//*[@id="content"]/table/tbody/tr/td[2]');
+
         $aboutHtml = $crawler->html();
 
         $aboutHtml = str_replace(['<br>'], '\n', $aboutHtml);
@@ -135,7 +137,7 @@ class CharacterParser implements ParserInterface
      */
     public function getMemberFavorites(): int
     {
-        $crawler = $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[1]');
+        $crawler = $this->crawler->filterXPath('//*[@id="content"]/table/tbody/tr/td[1]');
         $crawler = Parser::removeChildNodes($crawler);
 
         return (int) preg_replace('/\D/', '', $crawler->text());
@@ -157,7 +159,7 @@ class CharacterParser implements ParserInterface
     public function getAnimeography(): array
     {
         return $this->crawler
-            ->filterXPath('//div[contains(text(), \'Animeography\')]/../table[1]/tr')
+            ->filterXPath('//div[contains(text(), \'Animeography\')]/../table[1]/tbody/tr')
             ->each(
                 function (Crawler $c) {
                     return new AnimeographyParser($c)->getModel();
@@ -172,7 +174,7 @@ class CharacterParser implements ParserInterface
     public function getMangaography(): array
     {
         return $this->crawler
-            ->filterXPath('//div[contains(text(), \'Mangaography\')]/../table[2]/tr')
+            ->filterXPath('//div[contains(text(), \'Mangaography\')]/../table[2]/tbody/tr')
             ->each(
                 function (Crawler $c) {
                     return new MangaographyParser($c)->getModel();
@@ -188,7 +190,7 @@ class CharacterParser implements ParserInterface
     public function getVoiceActors(): array
     {
         return $this->crawler
-            ->filterXPath('//div[contains(text(), \'Voice Actors\')]/../table/tr')
+            ->filterXPath('//div[contains(text(), \'Voice Actors\')]/../table/tbody/tr')
             ->each(
                 function (Crawler $c) {
                     return new VoiceActorParser($c)->getModel();

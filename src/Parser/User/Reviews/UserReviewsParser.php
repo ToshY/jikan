@@ -36,7 +36,7 @@ class UserReviewsParser
 
     public function getReviews(): array
     {
-        $node = $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[2]//div[contains(@class, "review-element")]');
+        $node = $this->crawler->filterXPath('//*[@id="content"]/table/tbody/tr/td[2]//div[contains(@class, "review-element")]');
 
         if (!$node->count()) {
             return [];

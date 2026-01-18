@@ -62,7 +62,7 @@ class ResourceNewsListParser implements ParserInterface
     public function getHasNextPage(): bool
     {
         $pages = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[1]/a[contains(text(), "More News")]');
+            ->filterXPath('//*[@id="content"]/table/tbody/tr/td[2]/div[1]/a[contains(text(), "More News")]');
 
         if ($pages->count()) {
             return true;

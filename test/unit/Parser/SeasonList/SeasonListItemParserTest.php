@@ -20,9 +20,7 @@ class SeasonListItemParserTest extends TestCase
 
         $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/season/archive');
-        $this->parser = new SeasonListItemParser(
-            $crawler->filterXPath('//table[contains(@class, "anime-seasonal-byseason")]/tr')->first()
-        );
+        $this->parser = new SeasonListItemParser($crawler);
     }
 
     #[Test]

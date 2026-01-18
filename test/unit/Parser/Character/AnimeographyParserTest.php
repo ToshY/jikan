@@ -22,7 +22,7 @@ class AnimeographyParserTest extends TestCase
 
         $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/character/116281');
-        $crawler = $crawler->filterXPath('//div[contains(text(), \'Animeography\')]/../table/tr')->first();
+        $crawler = $crawler->filterXPath('//div[contains(text(), \'Animeography\')]/../table/tbody/tr')->first();
         $this->parser = new \Jikan\Parser\Character\AnimeographyParser($crawler);
     }
 

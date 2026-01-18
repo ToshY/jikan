@@ -22,7 +22,7 @@ class VoiceActorParserTest extends TestCase
 
         $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/character/116281');
-        $crawler = $crawler->filterXPath('//div[contains(text(), \'Voice Actors\')]/../table/tr')->first();
+        $crawler = $crawler->filterXPath('//div[contains(text(), \'Voice Actors\')]/../table/tbody/tr')->first();
         $this->parser = new \Jikan\Parser\Character\VoiceActorParser($crawler);
     }
 

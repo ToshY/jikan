@@ -305,7 +305,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_opening(): void
     {
         $ops = $this->parser->getOpeningThemes();
-        self::assertCount(1, $ops);
+        self::assertCount(3, $ops);
         self::assertContains('"H.T." by Tsuneo Imahori', $ops);
     }
 
@@ -321,7 +321,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_preview_video()
     {
         $preview = $this->parser->getPreview();
-        self::assertEquals('https://www.youtube.com/embed/bJVyIXeUznY?enablejsapi=1&wmode=opaque&autoplay=1', $preview);
+        self::assertEquals('https://www.youtube-nocookie.com/embed/bJVyIXeUznY?enablejsapi=1&wmode=opaque&autoplay=1', $preview);
     }
 
     #[Test]

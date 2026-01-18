@@ -36,7 +36,7 @@ class ClubParser
     public function getClubs(): array
     {
         $node = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/ol/li');
+            ->filterXPath('//*[@id="content"]/table/tbody/tr/td[2]/ol/li');
 
         return $node->each(function (Crawler $crawler) {
             return Model\Common\ClubMeta::factory(

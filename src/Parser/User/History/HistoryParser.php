@@ -35,7 +35,7 @@ class HistoryParser implements ParserInterface
      */
     public function getModel(): array
     {
-        $node = $this->crawler->filterXPath('//div[@id="content"]/div/table/tr');
+        $node = $this->crawler->filterXPath('//div[@id="content"]/div/table/tbody/tr');
 
         return $node
             ->reduce(

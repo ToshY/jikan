@@ -174,7 +174,7 @@ class NewsParser implements ParserInterface
     {
         $related = [];
         $this->crawler
-            ->filterXPath('//table[contains(@class, "news-related-database")]/tr')
+            ->filterXPath('//table[contains(@class, "news-related-database")]/tbody/tr')
             ->each(
                 function (Crawler $c) use (&$related) {
                     $links = $c->filterXPath('//td[2]/a');

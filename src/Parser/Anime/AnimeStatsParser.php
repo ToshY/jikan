@@ -162,7 +162,7 @@ class AnimeStatsParser implements ParserInterface
             return [];
         }
 
-        $table = $this->crawler->filterXPath('//h2[text()="Score Stats"]/following-sibling::table[1]/tr');
+        $table = $this->crawler->filterXPath('//h2[text()="Score Stats"]/following-sibling::table[1]/tbody/tr');
 
         $scores = [];
         $table

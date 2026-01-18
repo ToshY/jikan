@@ -16,10 +16,7 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class Recommendation implements ParserInterface
 {
-    /**
-     * @var Crawler
-     */
-    private $crawler;
+    private \Symfony\Component\DomCrawler\Crawler $crawler;
 
     /**
      * Recommendation constructor.
@@ -38,7 +35,7 @@ class Recommendation implements ParserInterface
     public function getUrl(): string
     {
         return $this->crawler
-            ->filterXPath('//table/tr/td[2]/div[2]/a[1]')->attr('href');
+            ->filterXPath('//table/tbody/tr/td[2]/div[2]/a[1]')->attr('href');
     }
 
     /**
@@ -49,7 +46,7 @@ class Recommendation implements ParserInterface
     {
         return Parser::parseImageQuality(
             $this->crawler
-                ->filterXPath('//table/tr/td[1]/div[1]/a/img')->attr('data-src')
+                ->filterXPath('//table/tbody/tr/td[1]/div[1]/a/img')->attr('data-src')
         );
     }
 
@@ -60,7 +57,7 @@ class Recommendation implements ParserInterface
     public function getRecommendationurl(): string
     {
         return Constants::BASE_URL . $this->crawler
-            ->filterXPath('//table/tr/td[2]/div[2]/span/a')->attr('href');
+            ->filterXPath('//table/tbody/tr/td[2]/div[2]/span/a')->attr('href');
     }
 
     /**
@@ -70,7 +67,7 @@ class Recommendation implements ParserInterface
     public function getTitle(): string
     {
         return $this->crawler
-            ->filterXPath('//table/tr/td[2]/div[2]/a[1]')->text();
+            ->filterXPath('//table/tbody/tr/td[2]/div[2]/a[1]')->text();
     }
 
     /**
@@ -80,7 +77,7 @@ class Recommendation implements ParserInterface
     public function getRecommendationCount(): int
     {
         $node = $this->crawler
-            ->filterXPath('//table/tr/td[2]/div[4]/a[1]/strong');
+            ->filterXPath('//table/tbody/tr/td[2]/div[4]/a[1]/strong');
 
         if (!$node->count()) {
             return 1;

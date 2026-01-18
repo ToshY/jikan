@@ -259,7 +259,7 @@ class AnimeParser implements ParserInterface
     public function getPremiered(): ?string
     {
         $premiered = $this->crawler
-            ->filterXPath('//span[text()="Premiered:"]');
+            ->filterXPath('//span[contains(normalize-space(.), "Premiered:")]');
 
         if (!$premiered->count()) {
             return null;
@@ -702,7 +702,7 @@ class AnimeParser implements ParserInterface
     public function getStreamingLinks(): array
     {
         $links = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[1]/div/div[contains(@class, "broadcast")]//div[contains(@class, "broadcast")]');
+            ->filterXPath('//*[@id="content"]/table/tbody/tr/td[1]/div/div[contains(@class, "broadcast")]//div[contains(@class, "broadcast")]');
 
         if (!$links->count()) {
             return [];
@@ -766,7 +766,7 @@ class AnimeParser implements ParserInterface
 
         // Then we'll parse the table
         $this->crawler
-            ->filterXPath('//table[contains(@class, "entries-table")]/tr')
+            ->filterXPath('//table[contains(@class, "entries-table")]/tbody/tr')
             ->each(
                 function (Crawler $c) use (&$related) {
                     $links = $c->filterXPath('//td[2]//a');
@@ -834,9 +834,9 @@ class AnimeParser implements ParserInterface
      */
     public function getOpeningThemes(): array
     {
-        $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]/table/tr');
+        $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]/table/tbody/tr/td');
 
-        if (preg_match('~No opening themes have been added to this title~', $node->text())) {
+        if (str_contains($node->text(), 'No opening themes have been added to this title')) {
             return [];
         }
 
@@ -853,7 +853,7 @@ class AnimeParser implements ParserInterface
      */
     public function getEndingThemes(): array
     {
-        $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]/table/tr');
+        $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]/table/tbody/tr');
 
         if (preg_match('~No ending themes have been added to this title~', $node->text())) {
             return [];

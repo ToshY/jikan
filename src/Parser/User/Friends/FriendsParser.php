@@ -58,7 +58,7 @@ class FriendsParser implements ParserInterface
     public function getLastPage(): int
     {
         $pages = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[contains(@class, "mt12 mb12")]/div[contains(@class, "pagination")]');
+            ->filterXPath('//*[@id="content"]/table/tbody/tr/td[2]/div[2]/div[contains(@class, "mt12 mb12")]/div[contains(@class, "pagination")]');
 
         if (!$pages->count()) {
             return 1;

@@ -195,7 +195,7 @@ class UserProfileParser
      */
     public function getAbout(): ?string
     {
-        $about = $this->crawler->filterXPath('//div[@class=\'profile-about-user js-truncate-inner\']/table/tr/td/div');
+        $about = $this->crawler->filterXPath('//div[@class=\'profile-about-user js-truncate-inner\']/table/tbody/tr/td/div');
 
 
         if (!$about->count()) {
