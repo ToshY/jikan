@@ -27,9 +27,10 @@
     "require": {
         "php": "^8.4",
         "ext-json": "*",
-        "symfony/browser-kit": "^6.4|^7.0|^8.0",
-        "symfony/css-selector": "^6.4|^7.0|^8.0",
-        "symfony/http-client": "^6.4|^7.0|^8.0"
+        "phpro/grumphp": "^2",
+        "symfony/browser-kit": "^8.0",
+        "symfony/css-selector": "^8.0",
+        "symfony/http-client": "^8.0"
     },
     "require-dev": {
         "brianium/paratest": "^7.3",
@@ -37,7 +38,6 @@
         "friendsofphp/php-cs-fixer": "^3.8",
         "jikan-me/jikan-fixtures": "dev-master",
         "php-parallel-lint/php-parallel-lint": "^1.4",
-        "phpro/grumphp": "^1",
         "squizlabs/php_codesniffer": "^3.3"
     },
     "scripts": {
